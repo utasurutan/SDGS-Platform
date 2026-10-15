@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Mental Health Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="signup-container">
+        
+        <!-- Sisi Kiri: Poster -->
+        <section class="sign-up-left">
+            <div class="sign-up-poster">
+                <img src="../Assets/Picture/Signup Poster.png" alt="Sign In Poster">
+            </div>
+        </section>
+
+        <!-- Sisi Kanan: Form -->
+        <section class="sign-up-right">
+            <div class="up-text">
+                <img src="../Assets/Icon/solar_user-plus-broken.png" alt="Icon User">
+                <div class="header-content">
+                    <h1>Selamat Datang Kembali</h1>
+                    <p>Masuk ke akunmu untuk melanjutkan perjalanan ketenanganmu.</p>
+                </div>
+            </div>
+
+            <!-- Formulir Input -->
+            <div class="input-group">
+                <label for="email">Alamat email <span class="required">*</span></label>
+                <input type="email" id="email" placeholder="Masukkan alamat email kamu disini">
+            </div>
+
+            <div class="input-group">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                    <label for="password" style="margin-bottom: 0;">Kata Sandi <span class="required">*</span></label>
+                    <a href="#" class="link-blue" style="font-size: 12px;">Lupa kata sandi?</a>
+                </div>
+                <input type="password" id="password" placeholder="Masukkan kata sandi kamu disini">
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="remember">
+                <label for="remember">Ingat saya di perangkat ini</label>
+            </div>
+
+            <!-- Tombol & Aksi -->
+            <button type="submit" class="btn-daftar">Masuk</button>
+
+            <div class="divider">
+                <span>Atau</span>
+            </div>
+
+            <button type="button" class="btn-google">
+                <img src="../Assets/Icon/devicon_google.png" alt="Google Icon"> 
+                <span>Masuk dengan Google</span>
+            </button>
+
+            <p class="login-redirect">
+                Belum memiliki akun? <span class="highlight"><a href="sign-up.html" class="link-blue">Daftar sekarang</a></span>
+            </p>
+            <p class="login-redirect" style="margin-top: 10px;">
+                <a href="landing-page.html" class="link-blue">&larr; Kembali ke Beranda</a>
+            </p>
+        </section>
+
+    </main>
+</body>
+</html>

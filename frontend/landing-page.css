@@ -1,0 +1,598 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #f8fafc;
+    color: #0f172a;
+}
+
+/* Header Container (3-Column Grid: Kiri - Tengah - Kanan) */
+.header-container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 20px 48px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+}
+
+/* Brand Logo (Kiri) */
+.aura-sync-logo {
+    justify-self: start;
+    font-size: 25px;
+    font-weight: 800;
+    color: #2b7fff;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.aura-sync-logo:hover {
+    opacity: 0.9;
+}
+
+/* Navbar (Tengah Pas) */
+.navbar-container {
+    justify-self: center;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: #475569;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 9px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.navbar-links a:hover {
+    color: #2b7fff;
+}
+
+/* Button Group (Kanan) */
+.btn-group {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.btn-contact {
+    padding: 20px;
+    background-color: #135CEA;
+    color: #ffffff;
+    border-radius: 9px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-contact:hover {
+    background-color: #1a6fe8;
+    transform: translateY(-1px);
+}
+
+.btn-bell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 9px;
+    background: #f1f5f9;
+    color: #475569;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: 1px solid #e2e8f0;
+}
+
+.btn-bell:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+/* Mobile Hamburger Button (Desktop: Hidden) */
+.mobile-menu-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 9px;
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mobile-menu-btn:hover {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+/* Mobile Nav Dropdown */
+.mobile-nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid #e2e8f0;
+    padding: 16px 24px;
+    box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
+    z-index: 99;
+}
+
+.mobile-nav-menu ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+}
+
+.mobile-nav-menu a {
+    display: block;
+    padding: 12px 16px;
+    color: #334155;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.mobile-nav-menu a:hover,
+.mobile-nav-menu a:active {
+    background: #eff6ff;
+    color: #2b7fff;
+}
+
+/* Section 1: Hero Page */
+.main-wrapper {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.hero-page {
+    display: grid;
+    grid-template-columns: 1.12fr 0.88fr;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 48px 80px;
+    gap: 36px;
+}
+
+/* Kolom Kiri */
+.hero-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-text {
+    margin: 0;
+}
+
+.hero-top-txt {
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 1.22;
+    color: #0f172a;
+    letter-spacing: -0.025em;
+}
+
+.hero-desc-text {
+    font-weight: 500;
+    font-size: 16px;
+    margin-top: 24px;
+    color: #475569;
+    line-height: 1.65;
+}
+
+.mulai-pj-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1E6AFF;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 16px 36px;
+    border-radius: 14px;
+    margin-top: 32px;
+    box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1);
+    transition: all 0.25s ease;
+    align-self: flex-start;
+}
+
+.mulai-pj-btn:hover {
+    background-color: #135CEA;
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.mulai-pj-btn:active {
+    transform: translateY(0);
+}
+
+/* Stats */
+.stat-container {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    margin-top: 50px;
+    padding: 0;
+}
+
+.stat-items {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #706EE7;
+    margin-bottom: 6px;
+}
+
+.stat-number {
+    font-size: 26px;
+    font-weight: 700;
+    color: #706EE7;
+    line-height: 1;
+}
+
+.stat-bottom p {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #334155;
+    white-space: nowrap;
+    line-height: 1.4;
+}
+
+/* Review Card */
+.review-wrapper {
+    margin-top: 38px;
+    padding: 0;
+}
+
+.review-image {
+    display: block;
+    width: 275px;
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.04));
+}
+
+/* Kolom Kanan: Visual */
+.hero-visual {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+}
+
+.hero-visual img {
+    width: 100%;
+    max-width: 615px;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (TABLET & MOBILE)
+   ========================================================================== */
+
+/* Tablet & Laptop Kecil (<= 1024px) */
+@media (max-width: 1024px) {
+    .header-container {
+        padding: 16px 28px;
+    }
+
+    .navbar-links {
+        gap: 20px;
+    }
+
+    .navbar-links a {
+        font-size: 15px;
+        padding: 8px 12px;
+    }
+
+    .hero-page {
+        grid-template-columns: 1fr;
+        padding: 36px 32px 64px;
+        gap: 40px;
+    }
+
+    .hero-visual {
+        justify-content: center;
+        order: 2;
+    }
+
+    .hero-visual img {
+        max-width: 520px;
+    }
+
+    .stat-container {
+        gap: 36px;
+        flex-wrap: wrap;
+    }
+}
+
+/* Tablet & Ponsel (<= 768px) */
+@media (max-width: 768px) {
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        padding: 14px 20px;
+        position: sticky;
+    }
+
+    .aura-sync-logo {
+        font-size: 22px;
+    }
+
+    .navbar-container {
+        display: none;
+    }
+
+    .btn-group {
+        gap: 8px;
+    }
+
+    .btn-contact {
+        padding: 9px 16px;
+        font-size: 13.5px;
+        border-radius: 8px;
+    }
+
+    .btn-bell {
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+        width: 38px;
+        height: 38px;
+        border-radius: 8px;
+    }
+
+    .mobile-nav-menu {
+        display: block;
+        animation: menuFadeIn 0.2s ease-out;
+    }
+
+    /* Urutan mobile yang natural: Headline & CTA -> Visual -> Stats -> Review */
+    .hero-page {
+        display: flex;
+        flex-direction: column;
+        padding: 28px 20px 52px;
+        gap: 32px;
+    }
+
+    .hero-left {
+        display: contents;
+    }
+
+    .hero-text {
+        order: 1;
+        text-align: left;
+    }
+
+    .hero-visual {
+        order: 2;
+        justify-content: center;
+        margin: 4px 0 10px;
+        width: 100%;
+    }
+
+    .hero-visual img {
+        width: 100%;
+        max-width: 420px;
+    }
+
+    .stat-container {
+        order: 3;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px 16px;
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .stat-items:last-child {
+        grid-column: span 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .stat-items:last-child .stat-top {
+        justify-content: center;
+    }
+
+    .stat-number {
+        font-size: 24px;
+    }
+
+    .stat-bottom p {
+        font-size: 12.5px;
+        white-space: normal;
+    }
+
+    .review-wrapper {
+        order: 4;
+        margin-top: 24px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .review-image {
+        max-width: 260px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .hero-top-txt {
+        font-size: 32px;
+        line-height: 1.25;
+    }
+
+    .hero-desc-text {
+        font-size: 15px;
+        margin-top: 16px;
+        line-height: 1.6;
+    }
+
+    .hero-top-txt br,
+    .hero-desc-text br {
+        display: none;
+    }
+
+    .mulai-pj-btn {
+        padding: 14px 28px;
+        font-size: 15px;
+        margin-top: 26px;
+    }
+}
+
+/* Layar Ponsel Kecil (<= 480px) */
+@media (max-width: 480px) {
+    .header-container {
+        padding: 12px 16px;
+    }
+
+    .aura-sync-logo {
+        font-size: 20px;
+    }
+
+    .btn-group {
+        gap: 6px;
+    }
+
+    .btn-contact {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .btn-bell,
+    .mobile-menu-btn {
+        width: 34px;
+        height: 34px;
+    }
+
+    .hero-page {
+        padding: 20px 16px 44px;
+        gap: 28px;
+    }
+
+    .hero-top-txt {
+        font-size: 26px;
+        line-height: 1.24;
+    }
+
+    .hero-desc-text {
+        font-size: 14px;
+        line-height: 1.55;
+        margin-top: 12px;
+    }
+
+    .mulai-pj-btn {
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 15px;
+        text-align: center;
+        border-radius: 12px;
+        margin-top: 22px;
+    }
+
+    .hero-visual img {
+        max-width: 320px;
+    }
+
+    .stat-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px 10px;
+    }
+
+    .stat-items:last-child {
+        grid-column: span 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .stat-items:last-child .stat-top {
+        justify-content: center;
+    }
+
+    .stat-number {
+        font-size: 22px;
+    }
+
+    .stat-bottom p {
+        font-size: 12px;
+    }
+
+    .review-wrapper {
+        justify-content: center;
+    }
+
+    .review-image {
+        max-width: 240px;
+        margin: 0 auto;
+    }
+}
+
+@keyframes menuFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
