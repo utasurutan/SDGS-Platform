@@ -596,3 +596,213 @@ body {
         transform: translateY(0);
     }
 }
+
+/* ==========================================================================
+   Section 2: Dampak Stres (Stress Impact)
+   ========================================================================== */
+
+.stress-impact-section {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 60px 48px 120px;
+    width: 100%;
+}
+
+.stress-impact-header {
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.stress-impact-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+}
+
+.impact-highlight {
+    color: #1E6AFF;
+    display: inline;
+}
+
+.stress-impact-subtitle {
+    font-size: 15px;
+    font-weight: 500;
+    color: #475569;
+    margin-top: 14px;
+    line-height: 1.6;
+}
+
+/* Grid: 6 boxes with 20px column gap and 44px row gap */
+.stress-impact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 20px;
+    row-gap: 44px;
+    margin-top: 56px;
+}
+
+/* Card Container */
+.stress-card {
+    background-color: #ffffff;
+    border: 1px solid rgba(36, 34, 34, 0.1);
+    border-radius: 20px;
+    padding: 28px 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.stress-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px -10px rgba(30, 106, 255, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+    border-color: rgba(30, 106, 255, 0.28);
+}
+
+/* Icon Box */
+.stress-card-icon-box {
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    border-radius: 16px;
+    background-color: #EFF4FD;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.stress-card:hover .stress-card-icon-box {
+    background-color: #e5effd;
+    transform: scale(1.04);
+}
+
+.stress-card-icon {
+    color: #1E6AFF;
+}
+
+/* Text & CTA */
+.stress-card-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.stress-card-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #0f172a;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+}
+
+.stress-card-desc {
+    font-size: 12px;
+    font-weight: 500;
+    color: #475569;
+    line-height: 1.55;
+    margin-bottom: 16px;
+}
+
+.stress-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #1E6AFF;
+    font-size: 13.5px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    align-self: flex-start;
+}
+
+.stress-card-cta .cta-arrow {
+    transition: transform 0.2s ease;
+}
+
+.stress-card-cta:hover {
+    color: #135CEA;
+}
+
+.stress-card-cta:hover .cta-arrow {
+    transform: translateX(4px);
+}
+
+/* Responsive adjustments for Stress Impact Section */
+@media (max-width: 1024px) {
+    .stress-impact-section {
+        padding: 50px 32px 90px;
+    }
+
+    .stress-impact-grid {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 20px;
+        row-gap: 36px;
+    }
+
+    .stress-impact-title {
+        font-size: clamp(26px, 2.9vw, 32px);
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 768px) {
+    .stress-impact-section {
+        padding: 40px 20px 70px;
+    }
+
+    .stress-impact-title {
+        font-size: 26px;
+        line-height: 1.3;
+        white-space: normal;
+    }
+
+    .stress-impact-subtitle {
+        font-size: 14.5px;
+        margin-top: 12px;
+    }
+
+    .stress-impact-grid {
+        grid-template-columns: 1fr;
+        row-gap: 20px;
+        margin-top: 36px;
+    }
+
+    .stress-card {
+        padding: 22px 20px;
+        gap: 16px;
+        border-radius: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .stress-impact-section {
+        padding: 32px 16px 56px;
+    }
+
+    .stress-impact-title {
+        font-size: 22px;
+    }
+
+    .stress-impact-subtitle {
+        font-size: 13.5px;
+    }
+
+    .stress-card-icon-box {
+        width: 56px;
+        height: 56px;
+        min-width: 56px;
+        border-radius: 14px;
+    }
+
+    .stress-card-title {
+        font-size: 18px;
+    }
+}

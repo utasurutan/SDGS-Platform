@@ -1,8 +1,68 @@
 import { useState } from "react";
 import "./landing-page.css";
-import { Bell, Watch, BedDouble, FaceGrinning, Menu, X } from "lucide-react";
+import {
+  Bell,
+  Watch,
+  BedDouble,
+  FaceGrinning,
+  Menu,
+  X,
+  CloudMoon,
+  Frown,
+  HeartPlus,
+  Dumbbell,
+  ShieldPlus,
+  Brain,
+  ArrowRight,
+} from "lucide-react";
 import reviewImg from "../Assets/Picture/Group 21.png";
 import heroVisualImg from "../Assets/Picture/Group 26 (1).svg";
+
+const impactCards = [
+  {
+    id: 1,
+    icon: CloudMoon,
+    title: "Pola Istirahat",
+    description: "Dampak kelelahan ini sering kali datang diam-diam dan merusak fokusmu",
+    link: "#pola-istirahat",
+  },
+  {
+    id: 2,
+    icon: Frown,
+    title: "Kesehatan Mental",
+    description: "Mengabaikan stres berkepanjangan dapat menguras stamina emosional",
+    link: "#kesehatan-mental",
+  },
+  {
+    id: 3,
+    icon: HeartPlus,
+    title: "Detak Jantung",
+    description: "Kecemasan yang menumpuk memicu lonjakan detak jantung (BPM) berlebih",
+    link: "#detak-jantung",
+  },
+  {
+    id: 4,
+    icon: Dumbbell,
+    title: "Ketegangan Otot",
+    description: "menahan tegak otot leher yang sering kali berujung pada sakit kepala",
+    link: "#ketegangan-otot",
+  },
+  {
+    id: 5,
+    icon: ShieldPlus,
+    title: "Imun Menurun",
+    description: "sistem kekebalan tubuh, membuatmu jadi lebih rentan terserang penyakit",
+    link: "#imun-menurun",
+  },
+  {
+    id: 6,
+    icon: Brain,
+    title: "Penurunan Fokus",
+    description: "Pikiran yang terlalu penuh (brain fog) membuat konsentrasi buyar",
+    link: "#penurunan-fokus",
+  },
+];
+
 
 export default function LandingPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -109,6 +169,40 @@ export default function LandingPage() {
           {/* Kolom Kanan: Visual Ilustrasi */}
           <div className="hero-visual">
             <img src={heroVisualImg} alt="AuraSync Platform Preview" />
+          </div>
+        </section>
+ 
+        {/* Section 2: Dampak Stres */}
+        <section className="stress-impact-section" id="dampak-stres">
+          <div className="stress-impact-header">
+            <h2 className="stress-impact-title">
+              Beberapa Dampak Stres Membuat{" "}
+              <span className="impact-highlight">Kamu Terkena Hal Ini!</span>
+            </h2>
+            <p className="stress-impact-subtitle">
+              Dampak kelelahan ini sering kali datang diam-diam dan merusak fokusmu
+            </p>
+          </div>
+
+          <div className="stress-impact-grid">
+            {impactCards.map((card) => {
+              const IconComponent = card.icon;
+              return (
+                <div key={card.id} className="stress-card">
+                  <div className="stress-card-icon-box">
+                    <IconComponent className="stress-card-icon" size={28} strokeWidth={2.1} />
+                  </div>
+                  <div className="stress-card-content">
+                    <h3 className="stress-card-title">{card.title}</h3>
+                    <p className="stress-card-desc">{card.description}</p>
+                    <a href={card.link} className="stress-card-cta">
+                      <span>Pelajari lebih lanjut</span>
+                      <ArrowRight size={15} strokeWidth={2.2} className="cta-arrow" />
+                    </a>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </section>
       </main>
