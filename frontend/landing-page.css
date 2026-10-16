@@ -6,10 +6,17 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+    overflow-y: auto;
+}
+
 body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     background-color: #f8fafc;
     color: #0f172a;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 /* Header Container (3-Column Grid: Kiri - Tengah - Kanan) */
