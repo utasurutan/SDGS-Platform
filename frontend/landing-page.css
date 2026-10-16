@@ -280,7 +280,7 @@ body {
 
 .stat-bottom p {
     font-size: 13.5px;
-    font-weight: 600;
+    font-weight: 500;
     color: #334155;
     white-space: nowrap;
     line-height: 1.4;
@@ -803,6 +803,491 @@ body {
     }
 
     .stress-card-title {
+        font-size: 18px;
+    }
+}
+
+/* ===================================================
+   Section 3: Smart Band Showcase Section
+   =================================================== */
+
+.smartband-section {
+    width: 100%;
+    background: transparent;
+    padding: 60px 48px 90px;
+    position: relative;
+    overflow: hidden;
+}
+
+.smartband-container {
+    max-width: 1320px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Showcase Area */
+.smartband-showcase {
+    display: grid;
+    grid-template-columns: 1fr 390px;
+    align-items: center;
+    gap: 48px;
+    position: relative;
+    min-height: 480px;
+    padding: 30px 0 20px;
+}
+
+/* Visual Stage */
+.smartband-visual-stage {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1200px;
+}
+
+/* Parallax Watch Wrapper */
+.smartband-watch-wrapper {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.22s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+}
+
+.smartband-image {
+    width: 440px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    user-select: none;
+    pointer-events: none;
+    animation: gentleFloatWatch 6s ease-in-out infinite;
+    filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.06));
+}
+
+@keyframes gentleFloatWatch {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+/* Floating Badges */
+.floating-badge {
+    position: absolute;
+    z-index: 10;
+    pointer-events: auto;
+    user-select: none;
+    transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+}
+
+.floating-badge-content {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px; /* spacing between text and icon exactly 3px */
+    cursor: default;
+    transition: transform 0.2s ease;
+}
+
+.floating-badge:hover .floating-badge-content {
+    transform: scale(1.06);
+}
+
+.badge-text {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1e293b;
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+}
+
+.badge-svg-icon {
+    flex-shrink: 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Specific Badge Coordinates matching the screenshot */
+/* 1. HRV 84ms: Centered above the watches */
+.badge-hrv {
+    top: -15px;
+    left: 42%;
+    transform-origin: center center;
+}
+
+.badge-hrv .floating-badge-content {
+    animation: floatBadge1 4s ease-in-out infinite;
+}
+
+/* 2. Data Lebih Akurat: To the left of the black watch face */
+.badge-data {
+    top: 38%;
+    left: -85px;
+    transform-origin: center center;
+}
+
+.badge-data .floating-badge-content {
+    animation: floatBadge2 4.6s ease-in-out infinite 0.4s;
+}
+
+/* 3. Mendeteksi Detak Jantung: Below/right of the black watch */
+.badge-heart {
+    top: 72%;
+    right: -95px;
+    transform-origin: center center;
+}
+
+.badge-heart .floating-badge-content {
+    animation: floatBadge3 5s ease-in-out infinite 0.8s;
+}
+
+/* Continuous Floating / "Ngambang" Keyframes */
+@keyframes floatBadge1 {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes floatBadge2 {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes floatBadge3 {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-9px);
+    }
+}
+
+/* Right Side: Description */
+.smartband-desc-side {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 10px;
+}
+
+.smartband-desc-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: #0f172a;
+    line-height: 1.68;
+    max-width: 390px;
+    margin: 0;
+}
+
+/* Bottom Row: Footer / CTA */
+.smartband-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    margin-top: 40px;
+    padding-top: 20px;
+}
+
+.smartband-footer-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.smartband-footer-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #0f172a;
+    line-height: 1.3;
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+.smartband-footer-subtitle {
+    font-size: 14px;
+    font-weight: 500;
+    color: #475569;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* CTA Button */
+.smartband-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1E6AFF;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 14px 34px;
+    border-radius: 14px;
+    box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1);
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.smartband-cta-btn:hover {
+    background-color: #165be8;
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.smartband-cta-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 6px 16px -2px rgba(30, 106, 255, 0.38);
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    .smartband-section {
+        padding: 50px 32px 70px;
+    }
+
+    .smartband-showcase {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        justify-items: center;
+        text-align: center;
+    }
+
+    .smartband-desc-side {
+        justify-content: center;
+        padding-left: 0;
+    }
+
+    .smartband-desc-text {
+        max-width: 540px;
+        text-align: center;
+    }
+
+    .badge-data {
+        left: -20px;
+    }
+
+    .badge-heart {
+        right: -20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .smartband-section {
+        padding: 40px 20px 60px;
+    }
+
+    .smartband-image {
+        width: 340px;
+    }
+
+    .smartband-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 24px;
+        margin-top: 30px;
+    }
+
+    .smartband-cta-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .badge-hrv {
+        top: -10px;
+        left: 38%;
+    }
+
+    .badge-data {
+        top: 35%;
+        left: 0px;
+    }
+
+    .badge-heart {
+        top: 75%;
+        right: 0px;
+    }
+}
+
+@media (max-width: 480px) {
+    .smartband-section {
+        padding: 32px 16px 48px;
+    }
+
+    .smartband-image {
+        width: 290px;
+    }
+
+    .smartband-footer-title {
+        font-size: 20px;
+    }
+
+    .smartband-footer-subtitle {
+        font-size: 13px;
+    }
+
+    .smartband-desc-text {
+        font-size: 13.5px;
+    }
+
+    .badge-text {
+        font-size: 11px;
+    }
+}
+
+/* ===================================================
+   Section 4: Panduan Singkat Penggunaan Smart Wristband
+   =================================================== */
+
+.guide-section {
+    max-width: 1320px;
+    margin: 20px auto 0;
+    padding: 90px 48px 120px;
+    width: 100%;
+}
+
+.guide-header {
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto 56px;
+}
+
+.guide-title {
+    font-size: 36px;
+    font-weight: 700; /* bold */
+    color: #0f172a;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+}
+
+.guide-subtitle {
+    font-size: 15px;
+    font-weight: 600; /* semibold */
+    color: #334155;
+    margin-top: 14px;
+    line-height: 1.5;
+}
+
+.guide-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.guide-card {
+    width: 285px;
+    height: 380px;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.2); /* stroke: #000000 opacity 20% */
+    border-radius: 28px;
+    padding: 36px 28px 40px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.guide-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(91, 141, 239, 0.45);
+    box-shadow: 4px 4px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.guide-step-number {
+    font-size: 96px;
+    font-weight: 800; /* extrabold */
+    color: #5B8DEF;
+    line-height: 1;
+    margin-bottom: 24px;
+    letter-spacing: -0.04em;
+    user-select: none;
+}
+
+.guide-card-title {
+    font-size: 20px;
+    font-weight: 600; /* semibold */
+    color: #0f172a;
+    line-height: 1.35;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+}
+
+.guide-card-desc {
+    font-size: 14px;
+    font-weight: 500; /* medium */
+    color: #475569;
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .guide-section {
+        padding: 50px 32px 90px;
+    }
+
+    .guide-grid {
+        gap: 20px;
+    }
+
+    .guide-title {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 640px) {
+    .guide-section {
+        padding: 40px 20px 70px;
+    }
+
+    .guide-header {
+        margin-bottom: 36px;
+    }
+
+    .guide-title {
+        font-size: 26px;
+    }
+
+    .guide-subtitle {
+        font-size: 14px;
+    }
+
+    .guide-grid {
+        gap: 16px;
+    }
+
+    .guide-card {
+        width: 100%;
+        max-width: 285px;
+        height: auto;
+        min-height: 380px;
+        padding: 32px 24px 36px;
+        border-radius: 22px;
+    }
+
+    .guide-step-number {
+        font-size: 76px;
+        margin-bottom: 20px;
+    }
+
+    .guide-card-title {
         font-size: 18px;
     }
 }
