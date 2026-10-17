@@ -15,10 +15,14 @@ import {
   Brain,
   ArrowRight,
   HeartPulse,
+  Target,
+  Clock,
+  Users,
 } from "lucide-react";
 import reviewImg from "../Assets/Picture/Group 21.png";
 import heroVisualImg from "../Assets/Picture/Group 26 (1).svg";
 import smartBandImg from "../Assets/Picture/download__36_-removebg-preview 2.png";
+import commitmentImg from "../Assets/Picture/Frame 39.png";
 
 const impactCards = [
   {
@@ -410,6 +414,102 @@ export default function LandingPage({ onNavigate }) {
                 <p className="guide-card-desc">{item.description}</p>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Section 5: Komitmen Kami */}
+        <section className="commitment-section" id="tentang">
+          <div className="commitment-container">
+            {/* Kolom Kiri: Teks & Pelajari Komitmen Kami */}
+            <div className="commitment-left">
+              <span className="commitment-tag">Komitmen Kami</span>
+              <h2 className="commitment-title">
+                Dirancang untuk Masa<br />
+                Depan Kesehatan Mental<br />
+                yang <span className="commitment-highlight">Lebih Inklusif.</span>
+              </h2>
+              <p className="commitment-desc">
+                Dari kondisi penuh tekanan menuju ketenangan yang terukur, kami siap menuntun setiap orang menemukan keseimbangan mental harian mereka
+              </p>
+              <a href="#tentang" className="commitment-link">
+                Pelajari Komitmen Kami
+              </a>
+            </div>
+
+            {/* Kolom Tengah: Foto */}
+            <div className="commitment-middle">
+              <img
+                src={commitmentImg}
+                alt="Dirancang untuk Masa Depan Kesehatan Mental yang Lebih Inklusif"
+                className="commitment-image"
+              />
+            </div>
+
+            {/* Kolom Kanan: 3 Kotak Statistik */}
+            <div className="commitment-right">
+              {/* Box 1: TARGET */}
+              <div className="commitment-stat-card target-box">
+                <div className="stat-card-text">
+                  <span className="stat-card-label">TARGET</span>
+                  <div className="stat-card-value">3.4</div>
+                  <p className="stat-card-desc">Mendukung kesehatan mental dan kesejahteraan</p>
+                </div>
+                <div className="stat-card-icon">
+                  <Target size={26} strokeWidth={2.2} />
+                </div>
+              </div>
+
+              {/* Box 2: AKSES */}
+              <div className="commitment-stat-card akses-box">
+                <div className="stat-card-text">
+                  <span className="stat-card-label">AKSES</span>
+                  <div className="stat-card-value">100%</div>
+                  <p className="stat-card-desc">Bisa diakses dimanapun kapanpun</p>
+                </div>
+                <div className="stat-card-icon">
+                  <Clock size={26} strokeWidth={2.2} />
+                </div>
+              </div>
+
+              {/* Box 3: DAMPAK */}
+              <div className="commitment-stat-card dampak-box">
+                <div className="stat-card-text">
+                  <span className="stat-card-label">DAMPAK</span>
+                  <div className="stat-card-value">Ribuan</div>
+                  <p className="stat-card-desc">Jiwa lebih sadar dan terhubung dengan tubuhnya</p>
+                </div>
+                <div className="stat-card-icon">
+                  <Users size={26} strokeWidth={2.2} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 6: CTA Banner (Mari Wujudkan Kesehatan Mental) */}
+        <section className="cta-banner-section">
+          <div className="cta-banner-container">
+            <div className="cta-banner-content">
+              <h2 className="cta-banner-title">
+                Mari Wujudkan Kesehatan Mental yang<br />
+                Lebih Inklusif.
+              </h2>
+              <p className="cta-banner-desc">
+                Bergabunglah bersama ribuan orang yang telah menemukan ruang tenang harian mereka secara terjangkau
+              </p>
+            </div>
+            <a 
+              href="/sign-up"
+              onClick={(e) => {
+                if (onNavigate) {
+                  e.preventDefault();
+                  onNavigate("/sign-up");
+                }
+              }}
+              className="cta-banner-btn"
+            >
+              Mulai Perjalananmu
+            </a>
           </div>
         </section>
       </main>

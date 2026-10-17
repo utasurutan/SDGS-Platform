@@ -1298,3 +1298,399 @@ body {
         font-size: 18px;
     }
 }
+
+/* ===================================================
+   Section 5: Komitmen Kami (Commitment Section)
+   =================================================== */
+
+.commitment-section {
+    max-width: 1320px;
+    margin: 20px auto 0;
+    padding: 70px 48px 90px;
+    width: 100%;
+}
+
+.commitment-container {
+    display: grid;
+    grid-template-columns: minmax(360px, 1.2fr) minmax(280px, 340px) minmax(260px, 310px);
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+/* Left Column: Text & Link */
+.commitment-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.commitment-tag {
+    font-size: 15px;
+    font-weight: 400; /* regular */
+    color: #334155;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+}
+
+.commitment-title {
+    font-size: 36px;
+    font-weight: 600; /* semibold */
+    color: #0f172a;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.commitment-highlight {
+    color: #1E6AFF;
+    font-weight: 600;
+}
+
+.commitment-desc {
+    font-size: 14px;
+    font-weight: 500; /* medium */
+    color: #475569;
+    line-height: 1.6;
+    max-width: 440px;
+    margin: 24px 0 28px;
+}
+
+.commitment-link {
+    font-size: 15px;
+    font-weight: 600; /* semibold */
+    color: #1E6AFF;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.commitment-link:hover {
+    color: #135CEA;
+    transform: translateX(2px);
+    text-decoration: underline;
+}
+
+/* Middle Column: Center Photo */
+.commitment-middle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.commitment-image {
+    width: 100%;
+    max-width: 320px;
+    height: 380px;
+    object-fit: cover;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px -6px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.commitment-image:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 34px -4px rgba(0, 0, 0, 0.12);
+}
+
+/* Right Column: 3 Stat Cards */
+.commitment-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 310px;
+}
+
+.commitment-stat-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    padding: 16px 22px;
+    min-height: 102px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.04);
+}
+
+.commitment-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.08);
+}
+
+/* Card Background Colors */
+.commitment-stat-card.target-box {
+    background-color: #DFE7F8;
+}
+
+.commitment-stat-card.akses-box {
+    background-color: #E5DDFD;
+}
+
+.commitment-stat-card.dampak-box {
+    background-color: #C5EFCB;
+}
+
+.stat-card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    padding-right: 12px;
+}
+
+.stat-card-label {
+    font-size: 8px;
+    font-weight: 600; /* semibold */
+    color: #0f172a;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.stat-card-value {
+    font-size: 20px;
+    font-weight: 600; /* semibold */
+    color: #0f172a;
+    line-height: 1.25;
+    margin: 3px 0 2px;
+    letter-spacing: -0.01em;
+}
+
+.stat-card-desc {
+    font-size: 8px;
+    font-weight: 500; /* medium */
+    color: #334155;
+    line-height: 1.35;
+    margin: 0;
+    max-width: 180px;
+}
+
+.stat-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0f172a;
+    flex-shrink: 0;
+}
+
+/* ===================================================
+   Section 6: CTA Banner Section (Mari Wujudkan...)
+   =================================================== */
+
+.cta-banner-section {
+    max-width: 1320px;
+    margin: 20px auto 90px;
+    padding: 0 48px;
+    width: 100%;
+}
+
+.cta-banner-container {
+    background-color: #1E6AFF;
+    border-radius: 36px;
+    padding: 56px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.cta-banner-container:hover {
+    transform: translateY(-4px);
+    box-shadow: 4px 4px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.cta-banner-content {
+    max-width: 640px;
+}
+
+.cta-banner-title {
+    font-size: 36px;
+    font-weight: 700; /* bold */
+    color: #ffffff;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.cta-banner-desc {
+    font-size: 14px;
+    font-weight: 500; /* medium */
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin: 16px 0 0;
+    max-width: 520px;
+}
+
+.cta-banner-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    color: #1E6AFF;
+    font-size: 16px;
+    font-weight: 600; /* semibold */
+    text-decoration: none;
+    padding: 18px 40px;
+    border-radius: 16px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.08);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cta-banner-btn:hover {
+    background-color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px 0 rgba(0, 0, 0, 0.16);
+}
+
+.cta-banner-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* ===================================================
+   Responsive Adjustments for Section 5 & 6
+   =================================================== */
+
+@media (max-width: 1100px) {
+    .commitment-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+    }
+
+    .commitment-left {
+        grid-column: span 2;
+        max-width: 640px;
+    }
+
+    .commitment-desc {
+        max-width: 100%;
+    }
+
+    .commitment-middle {
+        justify-content: flex-start;
+    }
+
+    .commitment-right {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 860px) {
+    .commitment-section {
+        padding: 50px 32px 70px;
+    }
+
+    .commitment-container {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+
+    .commitment-left {
+        grid-column: span 1;
+    }
+
+    .commitment-middle {
+        justify-content: center;
+    }
+
+    .commitment-image {
+        max-width: 340px;
+        height: 380px;
+    }
+
+    .commitment-right {
+        max-width: 340px;
+        margin: 0 auto;
+    }
+
+    .cta-banner-section {
+        padding: 0 32px;
+        margin-bottom: 60px;
+    }
+
+    .cta-banner-container {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 44px 36px;
+        gap: 28px;
+        border-radius: 28px;
+    }
+
+    .cta-banner-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .cta-banner-title {
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 540px) {
+    .commitment-section {
+        padding: 40px 20px 50px;
+    }
+
+    .commitment-title {
+        font-size: 26px;
+    }
+
+    .commitment-tag {
+        font-size: 14px;
+    }
+
+    .commitment-desc {
+        font-size: 13.5px;
+        margin: 18px 0 22px;
+    }
+
+    .commitment-image {
+        width: 100%;
+        max-width: 100%;
+        height: 320px;
+        border-radius: 24px;
+    }
+
+    .commitment-right {
+        max-width: 100%;
+    }
+
+    .commitment-stat-card {
+        padding: 14px 18px;
+        border-radius: 16px;
+    }
+
+    .stat-card-value {
+        font-size: 18px;
+    }
+
+    .cta-banner-section {
+        padding: 0 16px;
+        margin-bottom: 40px;
+    }
+
+    .cta-banner-container {
+        padding: 32px 22px;
+        border-radius: 22px;
+    }
+
+    .cta-banner-title {
+        font-size: 24px;
+    }
+
+    .cta-banner-desc {
+        font-size: 13px;
+        margin-top: 12px;
+    }
+
+    .cta-banner-btn {
+        padding: 15px 24px;
+        font-size: 15px;
+        border-radius: 14px;
+    }
+}
