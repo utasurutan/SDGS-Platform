@@ -16,7 +16,10 @@ export default function ForgotPassword({ onNavigate }) {
     }
     setErrorMsg("");
     console.log("Reset password requested for email:", email);
-    setIsSuccess(true);
+    // Navigate to the Kata Sandi Baru page
+    if (onNavigate) {
+      onNavigate("/reset-password");
+    }
   };
 
   const handleLinkClick = (e, path) => {

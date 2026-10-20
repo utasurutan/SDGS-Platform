@@ -4,6 +4,7 @@ import SignUp from '../frontend/sign-up.jsx'
 import SignIn from '../frontend/sign-in.jsx'
 import PreferencePage from '../frontend/preference.jsx'
 import ForgotPassword from '../frontend/forgot-password.jsx'
+import ResetPassword from '../frontend/reset-password.jsx'
 
 function App() {
   const [currentPath, setCurrentPath] = useState<string>(() => window.location.pathname)
@@ -58,6 +59,15 @@ function App() {
     currentPath.endsWith('forgot-password.html')
   ) {
     return <ForgotPassword onNavigate={navigate} />
+  }
+
+  if (
+    currentPath === '/reset-password' ||
+    currentPath === '/kata-sandi-baru' ||
+    currentPath === '/frontend/reset-password.html' ||
+    currentPath.endsWith('reset-password.html')
+  ) {
+    return <ResetPassword onNavigate={navigate} />
   }
 
   return <LandingPage onNavigate={navigate} />
