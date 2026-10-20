@@ -3,6 +3,7 @@ import LandingPage from '../frontend/landing-page.jsx'
 import SignUp from '../frontend/sign-up.jsx'
 import SignIn from '../frontend/sign-in.jsx'
 import PreferencePage from '../frontend/preference.jsx'
+import ForgotPassword from '../frontend/forgot-password.jsx'
 
 function App() {
   const [currentPath, setCurrentPath] = useState<string>(() => window.location.pathname)
@@ -47,6 +48,16 @@ function App() {
     currentPath.endsWith('preference.html')
   ) {
     return <PreferencePage onNavigate={navigate} />
+  }
+
+  if (
+    currentPath === '/forgot-password' ||
+    currentPath === '/lupa-password' ||
+    currentPath === '/lupa-sandi' ||
+    currentPath === '/frontend/forgot-password.html' ||
+    currentPath.endsWith('forgot-password.html')
+  ) {
+    return <ForgotPassword onNavigate={navigate} />
   }
 
   return <LandingPage onNavigate={navigate} />

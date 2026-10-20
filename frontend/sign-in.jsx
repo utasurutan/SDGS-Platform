@@ -140,7 +140,11 @@ export default function SignIn({ onNavigate }) {
                 </button>
               </div>
               <div className="signin-forgot-row">
-                <a href="#lupa-sandi" className="signin-forgot-link">
+                <a
+                  href="/forgot-password"
+                  onClick={(e) => handleLinkClick(e, "/forgot-password")}
+                  className="signin-forgot-link"
+                >
                   Lupa Kata Sandi?
                 </a>
               </div>
