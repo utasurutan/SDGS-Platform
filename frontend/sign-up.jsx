@@ -29,6 +29,9 @@ export default function SignUp({ onNavigate }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Sign up data:", formData);
+    if (onNavigate) {
+      onNavigate("/preference");
+    }
   };
 
   const handleLinkClick = (e, path) => {

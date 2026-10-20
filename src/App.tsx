@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import LandingPage from '../frontend/landing-page.jsx'
 import SignUp from '../frontend/sign-up.jsx'
 import SignIn from '../frontend/sign-in.jsx'
+import PreferencePage from '../frontend/preference.jsx'
 
 function App() {
   const [currentPath, setCurrentPath] = useState<string>(() => window.location.pathname)
@@ -37,6 +38,15 @@ function App() {
     currentPath.endsWith('sign-in.html')
   ) {
     return <SignIn onNavigate={navigate} />
+  }
+
+  if (
+    currentPath === '/preference' ||
+    currentPath === '/preferences' ||
+    currentPath === '/frontend/preference.html' ||
+    currentPath.endsWith('preference.html')
+  ) {
+    return <PreferencePage onNavigate={navigate} />
   }
 
   return <LandingPage onNavigate={navigate} />
