@@ -4,8 +4,10 @@ import signupPoster from "../Assets/Picture/Signup Poster.png";
 import userPlusIcon from "../Assets/Icon/solar_user-plus-broken.png";
 import googleIcon from "../Assets/Icon/devicon_google.png";
 import { Eye, EyeOff, ArrowLeft, AlertCircle } from "lucide-react";
+import { useGoogleAuth } from "./useGoogleAuth.js";
 
 export default function SignUp({ onNavigate }) {
+  const { handleGoogleClick, isLoading: isGoogleLoading, authError: googleAuthError } = useGoogleAuth({ onNavigate });
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
@@ -247,10 +249,20 @@ export default function SignUp({ onNavigate }) {
               <span>Atau</span>
             </div>
 
-            <button type="button" className="btn-google">
+            <button
+              type="button"
+              className="btn-google"
+              onClick={handleGoogleClick}
+              disabled={isGoogleLoading}
+            >
               <img src={googleIcon} alt="" aria-hidden="true" />
-              <span>Masuk dengan Google</span>
+              <span>{isGoogleLoading ? "Menghubungkan..." : "Masuk dengan Google"}</span>
             </button>
+            {googleAuthError && (
+              <p style={{ color: "#ef4444", fontSize: "12px", textAlign: "center", marginTop: "6px" }}>
+                {googleAuthError}
+              </p>
+            )}
 
             <p className="login-redirect">
               Sudah memiliki akun?{" "}

@@ -3,6 +3,7 @@ import "./sign-in.css";
 import signinPoster from "../Assets/Picture/Group 26 (1).png";
 import googleIcon from "../Assets/Icon/devicon_google.png";
 import { Eye, EyeOff, ArrowLeft } from "lucide-react";
+import { useGoogleAuth } from "./useGoogleAuth.js";
 
 /**
  * Solar Login 2 Broken icon matching the reference design
@@ -28,6 +29,7 @@ function SolarLoginIcon({ className }) {
 }
 
 export default function SignIn({ onNavigate }) {
+  const { handleGoogleClick, isLoading: isGoogleLoading, authError: googleAuthError } = useGoogleAuth({ onNavigate });
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
@@ -163,10 +165,20 @@ export default function SignIn({ onNavigate }) {
             </div>
 
             {/* Tombol Google */}
-            <button type="button" className="signin-google-btn">
+            <button
+              type="button"
+              className="signin-google-btn"
+              onClick={handleGoogleClick}
+              disabled={isGoogleLoading}
+            >
               <img src={googleIcon} alt="" aria-hidden="true" />
-              <span>Masuk dengan Google</span>
+              <span>{isGoogleLoading ? "Menghubungkan..." : "Masuk dengan Google"}</span>
             </button>
+            {googleAuthError && (
+              <p style={{ color: "#ef4444", fontSize: "12px", textAlign: "center", marginTop: "6px" }}>
+                {googleAuthError}
+              </p>
+            )}
 
             {/* Redirect ke Sign Up */}
             <p className="signin-redirect-text">
