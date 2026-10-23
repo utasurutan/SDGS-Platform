@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuraSync - Weekly Bio-Insight</title>
+  <meta name="description" content="Rangkuman pola stres 7 hari terakhir dalam format kartu story interaktif.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Interactive Particle Background -->
+  <canvas id="particleCanvas"></canvas>
+
+  <main class="app-container">
+    
+    <!-- Header Navigasi -->
+    <header class="app-header">
+      <a href="dashboard.html" class="brand-logo">
+        <div class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </div>
+        <span class="brand-name">AuraSync</span>
+      </a>
+
+      <nav class="header-nav">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="decompression.html" class="nav-link">Decompression</a>
+        <a href="weekly.html" class="nav-link active">Weekly</a>
+        <a href="chat.html" class="nav-link">Curhat AI</a>
+        <a href="profile.html" class="nav-link">Profil</a>
+        <button id="btnLogout" class="nav-btn-logout" title="Keluar">Keluar</button>
+      </nav>
+    </header>
+
+    <div style="margin-bottom: 24px; text-align: center;">
+      <h1 style="font-size: 1.6rem; font-weight: 700;">Weekly Bio-Insight 📊</h1>
+      <p style="color: var(--text-muted); font-size: 0.88rem;">Pola ritme stres dan pemulihan tubuhmu dalam 7 hari terakhir.</p>
+    </div>
+
+    <!-- DECK KARTU BERGAYA STORY (INSTAGRAM STORY / SPOTIFY WRAPPED STYLE) -->
+    <div class="story-deck">
+      
+      <!-- KARTU 1: FREKUENSI STATUS WASPADA -->
+      <article class="story-card">
+        <div>
+          <span class="story-tag">#01 • FREKUENSI LONJAKAN</span>
+          <div class="story-stat-large" id="statWaspadaCount">-- Kali</div>
+        </div>
+        <p class="story-context">
+          Jumlah momen saat sensor gelang Biomark mendeteksi sistem saraf simpatikmu aktif intens dan memerlukan jeda bernapas.
+        </p>
+      </article>
+
+      <!-- KARTU 2: JAM PALING RAWAN STRES -->
+      <article class="story-card" style="background: linear-gradient(145deg, #162238, #0e1626);">
+        <div>
+          <span class="story-tag" style="color: #38bdf8;">#02 • PEAK STRESS HOUR</span>
+          <div class="story-stat-large" id="statPeakHour" style="font-size: 2.5rem;">--:--</div>
+        </div>
+        <p class="story-context" id="statPeakContext">
+          Menganalisis jam rawan stres puncak berdasarkan histori data...
+        </p>
+      </article>
+
+      <!-- KARTU 3: PEMICU UTAMA DOMINAN -->
+      <article class="story-card" style="background: linear-gradient(145deg, #1c2136, #0e1322);">
+        <div>
+          <span class="story-tag" style="color: #fbbf24;">#03 • TOP TRIGGER</span>
+          <div class="story-stat-large" id="statTopTrigger" style="font-size: 2rem;">--</div>
+        </div>
+        <p class="story-context" id="statTriggerContext">
+          Faktor yang paling sering kamu tandai saat pop-up Zero-Effort Mood Logger aktif.
+        </p>
+      </article>
+
+      <!-- KARTU 4: NARASI & SARAN PRAKTIS GEMINI AI -->
+      <article class="story-card" style="background: linear-gradient(145deg, #0e292a, #081a1f); border-color: rgba(45, 212, 191, 0.3);">
+        <div>
+          <span class="story-tag" style="color: #2dd4bf;">✨ #04 • GEMINI NARRATIVE INSIGHT</span>
+          <h2 style="font-size: 1.3rem; font-weight: 700; margin-top: 14px; color: #f0fdfa;">Refleksi & Saran Pemulihan</h2>
+        </div>
+        <p class="story-context" id="aiNarrativeText" style="margin-top: 16px; color: #ccfbf1; font-size: 1rem; line-height: 1.6;">
+          Gemini AI sedang membaca seluruh rekaman data mingguanmu untuk merangkai wawasan naratif...
+        </p>
+      </article>
+
+    </div>
+
+    <!-- Tombol Kembali ke Dashboard -->
+    <div style="text-align: center; margin-top: 36px;">
+      <a href="dashboard.html" class="btn-secondary" style="display: inline-block; text-decoration: none;">
+        ← Kembali ke Dashboard
+      </a>
+    </div>
+
+  </main>
+
+  <!-- Firebase CDN -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <!-- Modul Platform -->
+  <script src="js/config.js"></script>
+  <script src="js/firebase-service.js"></script>
+  <script src="js/ai-service.js"></script>
+  <script src="js/dummy-data-generator.js"></script>
+  <script src="js/mood-logger.js"></script>
+  <script src="js/emergency-handler.js"></script>
+  <script src="js/weekly.js"></script>
+  <script src="js/particles-bg.js"></script>
+</body>
+</html>

@@ -1,13 +1,114 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>sdgs-platform</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuraSync - Platform Pendamping Biomark-Stress Tracker</title>
+  <meta name="description" content="Platform web pendamping gelang pintar Biomark pendeteksi high-functioning anxiety untuk proposal SDGs SMK.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Interactive Particle Background -->
+  <canvas id="particleCanvas"></canvas>
+
+  <main class="app-container">
+    <div class="auth-wrapper">
+      
+      <!-- Logo dan Judul Platform -->
+      <header class="auth-header">
+        <div class="brand-logo" style="justify-content: center; margin-bottom: 8px;">
+          <div class="logo-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+          </div>
+          <span class="brand-name">AuraSync</span>
+          <span class="brand-badge">IoT SDGs</span>
+        </div>
+        <p>Pendamping Cerdas Gelang Biomark-Stress Tracker</p>
+      </header>
+
+      <!-- Pesan Peringatan / Error -->
+      <div id="authErrorMsg" style="display:none; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #fca5a5; padding: 10px 14px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 16px; text-align: center;"></div>
+
+      <!-- FORM 1: MASUK (LOGIN) -->
+      <div id="loginSection" class="card">
+        <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 18px; text-align: center;">Masuk ke Akun Anda</h2>
+        
+        <form id="formLogin">
+          <div class="form-group">
+            <label for="loginEmail" class="form-label">Alamat Email</label>
+            <input type="email" id="loginEmail" class="form-input" placeholder="contoh: nama@sekolah.sch.id" value="siswa@aurasync.id" required autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword" class="form-label">Kata Sandi</label>
+            <input type="password" id="loginPassword" class="form-input" placeholder="Minimal 6 karakter" value="123456" required autocomplete="current-password">
+          </div>
+
+          <button type="submit" class="btn-primary" id="btnLoginSubmit" style="margin-top: 8px;">
+            Masuk
+          </button>
+        </form>
+
+        <div class="auth-footer">
+          Belum punya akun? <a href="#" id="linkToRegister">Daftar di sini</a>
+        </div>
+      </div>
+
+      <!-- FORM 2: PENDAFTARAN (REGISTER) -->
+      <div id="registerSection" class="card" style="display: none;">
+        <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 18px; text-align: center;">Daftar Akun Baru</h2>
+        
+        <form id="formRegister">
+          <div class="form-group">
+            <label for="regNama" class="form-label">Nama Lengkap</label>
+            <input type="text" id="regNama" class="form-input" placeholder="Nama siswa / pengguna" required>
+          </div>
+
+          <div class="form-group">
+            <label for="regUmur" class="form-label">Umur (Tahun)</label>
+            <input type="number" id="regUmur" class="form-input" placeholder="Contoh: 17" min="10" max="99" value="17" required>
+          </div>
+
+          <div class="form-group">
+            <label for="regEmail" class="form-label">Alamat Email</label>
+            <input type="email" id="regEmail" class="form-input" placeholder="nama@email.com" required autocomplete="email">
+          </div>
+
+          <div class="form-group">
+            <label for="regPassword" class="form-label">Kata Sandi</label>
+            <input type="password" id="regPassword" class="form-input" placeholder="Minimal 6 karakter" required autocomplete="new-password">
+          </div>
+
+          <button type="submit" class="btn-primary" id="btnRegSubmit" style="margin-top: 8px;">
+            Daftar Sekarang
+          </button>
+        </form>
+
+        <div class="auth-footer">
+          Sudah punya akun? <a href="#" id="linkToLogin">Masuk di sini</a>
+        </div>
+      </div>
+
+      <!-- Keterangan Cepat Penguji -->
+      <div style="text-align: center; margin-top: 24px; font-size: 0.75rem; color: var(--text-subtle);">
+        💡 Mode Uji Coba Otomatis: Klik tombol <strong>"Masuk"</strong> untuk langsung mencoba tanpa perlu setup akun.
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Firebase Compat SDK dari CDN Resmi (Mudah dipahami pemula tanpa bundler) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <!-- Konfigurasi & Modul Aplikasi -->
+  <script src="js/config.js"></script>
+  <script src="js/firebase-service.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/particles-bg.js"></script>
+</body>
 </html>

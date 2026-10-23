@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuraSync - Decompression Room</title>
+  <meta name="description" content="Ruang pemulihan digital dan terapi relaksasi instan untuk menstabilkan kondisi fisik dan mental.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Interactive Particle Background -->
+  <canvas id="particleCanvas"></canvas>
+
+  <main class="app-container">
+    
+    <!-- Header Navigasi -->
+    <header class="app-header">
+      <a href="dashboard.html" class="brand-logo">
+        <div class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </div>
+        <span class="brand-name">AuraSync</span>
+      </a>
+
+      <nav class="header-nav">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="decompression.html" class="nav-link active">Decompression</a>
+        <a href="weekly.html" class="nav-link">Weekly</a>
+        <a href="chat.html" class="nav-link">Curhat AI</a>
+        <a href="profile.html" class="nav-link">Profil</a>
+        <button id="btnLogout" class="nav-btn-logout" title="Keluar">Keluar</button>
+      </nav>
+    </header>
+
+    <div style="margin-bottom: 22px;">
+      <h1 style="font-size: 1.5rem; font-weight: 700;">Decompression Room 🌿</h1>
+      <p style="color: var(--text-muted); font-size: 0.88rem;">Ruang pemulihan digital untuk meredakan ketegangan sistem saraf otonom.</p>
+    </div>
+
+    <!-- SARAN PERSONAL DARI GEMINI AI BERDASARKAN KONDISI BIOMETRIK -->
+    <section class="ai-insight-box">
+      <div class="ai-icon-badge">💡</div>
+      <div class="ai-insight-content">
+        <span class="ai-insight-title">Rekomendasi AI Personal</span>
+        <p class="ai-insight-text" id="aiSuggestionText">
+          Menyesuaikan terapi terbaik berdasarkan data ritme fisik dan pemicumu saat ini...
+        </p>
+      </div>
+    </section>
+
+    <!-- GRID 3 PILIHAN TERAPI -->
+    <section class="therapy-grid">
+      <div class="therapy-card active" data-mode="binaural" id="cardBinaural">
+        <div class="therapy-icon">🎧</div>
+        <h3 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 4px;">Binaural Beats</h3>
+        <p style="font-size: 0.8rem; color: var(--text-muted);">Gelombang frekuensi Alfa (10 Hz) untuk relaksasi mendalam.</p>
+      </div>
+
+      <div class="therapy-card" data-mode="whitenoise" id="cardWhiteNoise">
+        <div class="therapy-icon">🌧️</div>
+        <h3 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 4px;">White Noise</h3>
+        <p style="font-size: 0.8rem; color: var(--text-muted);">Derau frekuensi datar menenangkan untuk memblokir distraksi.</p>
+      </div>
+
+      <div class="therapy-card" data-mode="visual" id="cardVisual">
+        <div class="therapy-icon">🌀</div>
+        <h3 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 4px;">Grounding Visual</h3>
+        <p style="font-size: 0.8rem; color: var(--text-muted);">Latihan ritme napas 4-7-8 dipandu animasi lingkaran dinamis.</p>
+      </div>
+    </section>
+
+    <!-- KONTROL PEMUTAR AUDIO (BINAURAL / WHITE NOISE) -->
+    <section id="audioPlayerSection" class="therapy-player-box">
+      <h2 id="currentTherapyTitle" style="font-size: 1.2rem; font-weight: 700; margin-bottom: 6px;">Binaural Beats (Alfa 10 Hz)</h2>
+      <p id="currentTherapyDesc" style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 24px;">
+        Gunakan headphone untuk efek stimulasi otak bilateral yang maksimal.
+      </p>
+
+      <div>
+        <button id="btnPlayPause" class="player-btn-play" title="Putar Audio">
+          ▶️
+        </button>
+      </div>
+
+      <div class="player-volume-control">
+        <span>🔈</span>
+        <input type="range" id="volumeSlider" class="player-volume-slider" min="0" max="1" step="0.05" value="0.5">
+        <span>🔊</span>
+      </div>
+    </section>
+
+    <!-- KONTROL GROUNDING VISUAL (LINGKARAN DINAMIS 4-7-8) -->
+    <section id="visualGroundingSection" class="card grounding-container" style="display: none; text-align: center;">
+      <h2 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 4px;">Teknik Napas Grounding 4-7-8</h2>
+      <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 30px;">
+        Fokuskan pandangan pada lingkaran. Ikuti irama kembang-kempis napasmu.
+      </p>
+
+      <div class="breathing-circle-wrapper">
+        <div class="breathing-outer-ring"></div>
+        <div class="breathing-circle" id="breathingCircle">
+          <span style="font-size: 1.8rem; opacity: 0.9;">🌱</span>
+        </div>
+      </div>
+
+      <div class="breathing-instruction" id="breathingInstruction">Siap Mulai</div>
+      <div class="breathing-timer" id="breathingTimer">Tekan tombol di bawah untuk mulai</div>
+
+      <button id="btnToggleBreathing" class="btn-secondary" style="margin-top: 24px;">
+        Mulai Latihan Napas
+      </button>
+    </section>
+
+  </main>
+
+  <!-- Firebase CDN -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <!-- Modul Platform -->
+  <script src="js/config.js"></script>
+  <script src="js/firebase-service.js"></script>
+  <script src="js/audio-service.js"></script>
+  <script src="js/ai-service.js"></script>
+  <script src="js/dummy-data-generator.js"></script>
+  <script src="js/mood-logger.js"></script>
+  <script src="js/emergency-handler.js"></script>
+  <script src="js/decompression.js"></script>
+  <script src="js/particles-bg.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuraSync - Curhat Singkat AI</title>
+  <meta name="description" content="Ruang dengar aman dan suportif berbasis AI untuk meredakan kecemasan sejenak.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Interactive Particle Background -->
+  <canvas id="particleCanvas"></canvas>
+
+  <main class="app-container">
+    
+    <!-- Header Navigasi -->
+    <header class="app-header">
+      <a href="dashboard.html" class="brand-logo">
+        <div class="logo-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </div>
+        <span class="brand-name">AuraSync</span>
+      </a>
+
+      <nav class="header-nav">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="decompression.html" class="nav-link">Decompression</a>
+        <a href="weekly.html" class="nav-link">Weekly</a>
+        <a href="chat.html" class="nav-link active">Curhat AI</a>
+        <a href="profile.html" class="nav-link">Profil</a>
+        <button id="btnLogout" class="nav-btn-logout" title="Keluar">Keluar</button>
+      </nav>
+    </header>
+
+    <!-- BANNER WAJIB: DISCLAIMER BANTUAN PROFESIONAL -->
+    <div class="chat-disclaimer-banner">
+      <span style="font-size: 1.1rem; flex-shrink: 0;">⚠️</span>
+      <div>
+        <strong>Pemberitahuan:</strong> AI ini bukan pengganti bantuan profesional. Jika kamu dalam kondisi darurat, segera hubungi layanan darurat atau orang terdekat.
+      </div>
+    </div>
+
+    <!-- KONTAINER UTAMA PERCAKAPAN CHAT -->
+    <div class="card chat-container">
+      
+      <!-- Area Bubble Percakapan -->
+      <div class="chat-messages" id="chatMessages">
+        <!-- Bubble percakapan akan dirender secara dinamis oleh js/chat.js -->
+      </div>
+
+      <!-- Form Input Pesan -->
+      <form id="chatForm" class="chat-input-row">
+        <input 
+          type="text" 
+          id="chatInput" 
+          class="form-input" 
+          placeholder="Ceritakan apa yang sedang terasa berat di pikiranmu hari ini..." 
+          autocomplete="off"
+          required
+        >
+        <button type="submit" id="btnSend" class="btn-primary" style="width: auto; padding: 0 24px;">
+          Kirim
+        </button>
+      </form>
+
+    </div>
+
+  </main>
+
+  <!-- Firebase CDN -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <!-- Modul Platform -->
+  <script src="js/config.js"></script>
+  <script src="js/firebase-service.js"></script>
+  <script src="js/ai-service.js"></script>
+  <script src="js/dummy-data-generator.js"></script>
+  <script src="js/mood-logger.js"></script>
+  <script src="js/emergency-handler.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/particles-bg.js"></script>
+</body>
+</html>
