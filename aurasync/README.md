@@ -1,1 +1,0 @@
-# Modul AuraSync IoT & Firebase
