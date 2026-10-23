@@ -149,15 +149,15 @@ export default function ConnectDevice({ onNavigate }) {
   const handleConnect = () => {
     if (!deviceFound) return;
     setConnecting(true);
-    // Simulasi koneksi – navigate ke landing page setelah 1.5 detik
+    // Simulasi koneksi – navigate ke dashboard setelah 1.5 detik
     setTimeout(() => {
       setConnecting(false);
-      if (onNavigate) onNavigate("/");
+      if (onNavigate) onNavigate("/dashboard");
     }, 1500);
   };
 
   const handleSkip = () => {
-    if (onNavigate) onNavigate("/");
+    if (onNavigate) onNavigate("/dashboard");
   };
 
   const dots = ".".repeat(dotCount);

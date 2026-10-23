@@ -1,0 +1,1103 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+/* ============================================================
+   AuraSync IoT SDGs Platform - Dashboard Stylesheet
+   Presisi desain sesuai panduan & referensi mockup
+   ============================================================ */
+
+:root {
+  --primary-blue: #1E6AFF;
+  --primary-hover: #1557db;
+  --sidebar-icon-color: #293F6C;
+  --sidebar-highlight-color: #FFFFFF;
+  --text-dark: #0F172A;
+  --text-muted: #8E98A8;
+  --text-subtle: #64748B;
+  --border-card: #F1F5F9;
+  --bg-page: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --chart-stress: #1E6AFF;
+  --chart-pulse: #706EE7;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.025);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-dark);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Layout Container --- */
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--bg-page);
+}
+
+/* ============================================================
+   1. SIDEBAR NAVIGATION
+   ============================================================ */
+.dashboard-sidebar {
+  width: 215px;
+  min-width: 215px;
+  background-color: #ffffff;
+  border-right: 1px solid #edf2f7;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 22px 14px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  z-index: 50;
+}
+
+.dashboard-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.dashboard-sidebar::-webkit-scrollbar-thumb {
+  background-color: #e2e8f0;
+  border-radius: 4px;
+}
+
+/* --- Brand Logo (AuraSync - No Heart Icon) --- */
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding-left: 6px;
+  text-decoration: none;
+}
+
+.brand-text-aurasync {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1E6AFF;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+/* --- Navigation Groups --- */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sidebar-category {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Category header: Size: 11px, Weight: semibold */
+.category-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  margin-bottom: 2px;
+}
+
+/* Nav Item: Size: 13.5px, Weight: Medium */
+.nav-item-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 11px;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--sidebar-icon-color);
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+/* Normal Icon Color: #293F6C */
+.nav-item-btn .nav-icon {
+  color: var(--sidebar-icon-color);
+  transition: color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.nav-item-btn:hover {
+  background-color: #F1F5F9;
+  color: #1E293B;
+}
+
+/* Highlight (Active) state */
+.nav-item-btn.active {
+  background-color: #1E6AFF;
+  color: var(--sidebar-highlight-color) !important;
+  box-shadow: 0 3px 10px rgba(30, 106, 255, 0.24);
+}
+
+.nav-item-btn.active .nav-icon {
+  color: var(--sidebar-highlight-color) !important;
+}
+
+/* --- Bottom Card in Sidebar (IoT Smart Band) --- */
+.sidebar-device-card {
+  margin-top: 18px;
+  background-color: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 11px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.device-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.device-badge-title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #1E6AFF;
+}
+
+.device-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #1E6AFF;
+  box-shadow: 0 0 0 2px rgba(30, 106, 255, 0.2);
+}
+
+.device-battery-pct {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #64748B;
+}
+
+.device-card-subtitle {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.device-card-btn {
+  background-color: #1E6AFF;
+  color: #ffffff;
+  border: none;
+  border-radius: 7px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  width: 100%;
+}
+
+.device-card-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.device-card-btn:active {
+  transform: scale(0.98);
+}
+
+/* ============================================================
+   2. MAIN CONTENT AREA
+   ============================================================ */
+.dashboard-main {
+  flex: 1;
+  padding: 32px 38px 48px 38px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1300px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* --- Header Row --- */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* "Selamat Datang [Nama user]": Size: 24px, Weight: semibold */
+.welcome-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin: 0 0 4px 0;
+  letter-spacing: -0.02em;
+}
+
+.welcome-subtitle {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  margin: 0;
+  font-weight: 400;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 1px solid #E2E8F0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sidebar-icon-color);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.header-icon-btn:hover {
+  background-color: #F8FAFC;
+  border-color: #CBD5E1;
+}
+
+.notification-dot {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #EF4444;
+  border: 1.5px solid #ffffff;
+}
+
+.user-profile-capsule {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 14px 4px 6px;
+  background-color: #ffffff;
+  border: 1px solid #E2E8F0;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.user-profile-capsule:hover {
+  border-color: #CBD5E1;
+}
+
+.user-avatar-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #E2E8F0;
+}
+
+.user-avatar-fallback {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1E6AFF 0%, #706EE7 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.user-info-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-display-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+
+.user-display-meta {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   3. TIGA BOX ATAS (TOP METRIC CARDS)
+   ============================================================ */
+.top-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.metric-card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-card);
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+.metric-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.metric-card-icon-wrap {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background-color: #F0F5FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1E6AFF;
+}
+
+/* Top text : 13px, Medium */
+.metric-top-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: #1E293B;
+  margin: 0;
+}
+
+.metric-number-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+/* Number : 40px, Semibold */
+.metric-main-number {
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+/* /Number : 20px, semibold */
+.metric-sub-number {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.metric-unit-badge {
+  font-size: 11px;
+  font-weight: 600;
+  color: #1E6AFF;
+  background-color: #F0F5FF;
+  padding: 2px 7px;
+  border-radius: 6px;
+}
+
+/* Left bottom text : #1E6AFF, 11px, Medium */
+.metric-left-bottom-text {
+  font-size: 11px;
+  font-weight: 500;
+  color: #1E6AFF;
+  margin: 0;
+}
+
+/* Mid and right bottom text : #8E98A8, 11px, Medium */
+.metric-secondary-bottom-text {
+  font-size: 11px;
+  font-weight: 500;
+  color: #8E98A8;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ============================================================
+   4. SMART WATCH BAND ACTIVE STRIP BANNER
+   ============================================================ */
+.device-status-banner {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-card);
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.banner-left-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.banner-watch-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background-color: #EFF6FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1E6AFF;
+  flex-shrink: 0;
+}
+
+.banner-device-names {
+  display: flex;
+  flex-direction: column;
+}
+
+.banner-device-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.banner-device-signal {
+  font-size: 11.5px;
+  color: var(--text-muted);
+}
+
+.banner-divider {
+  width: 1px;
+  height: 28px;
+  background-color: #E2E8F0;
+}
+
+.banner-mid-info {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 12.5px;
+  color: #334155;
+  font-weight: 500;
+}
+
+.banner-status-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.banner-battery-tag {
+  color: var(--text-subtle);
+  font-size: 12px;
+}
+
+/* Mode Switcher Group */
+.banner-mode-switcher {
+  display: flex;
+  align-items: center;
+  background-color: #F1F5F9;
+  border-radius: 10px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.mode-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: #64748B;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mode-tab-btn:hover {
+  color: #1E293B;
+}
+
+.mode-tab-btn.active {
+  background-color: #1E6AFF;
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(30, 106, 255, 0.2);
+}
+
+/* ============================================================
+   5. CHART: KORELASI INDEKS STRES & DETAK NADI
+   ============================================================ */
+.chart-card-container {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-card);
+  padding: 22px 26px 18px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chart-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.chart-title-wrap h2 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 4px 0;
+}
+
+.chart-title-wrap p {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.chart-controls-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+/* Legend items */
+.chart-legend {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #64748B;
+}
+
+/* User specified colors:
+   Detak nadi color : #706EE7
+   Index stress color : #1E6AFF
+*/
+.legend-pill-stress {
+  width: 22px;
+  height: 5px;
+  border-radius: 3px;
+  background-color: var(--chart-stress);
+}
+
+.legend-pill-pulse {
+  width: 22px;
+  height: 5px;
+  border-radius: 3px;
+  background-color: var(--chart-pulse);
+}
+
+/* Timefilter tabs */
+.chart-time-tabs {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.time-tab-link {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+  font-family: inherit;
+}
+
+.time-tab-link:hover {
+  color: #1E293B;
+}
+
+.time-tab-link.active {
+  color: #1E6AFF;
+  font-weight: 600;
+}
+
+/* ============================================================
+   DECOUPLED NON-STRETCHED CHART STYLES
+   Semua label angka & teks menggunakan HTML native (Zero Stretch!)
+   ============================================================ */
+.chart-body-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.chart-main-row {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+/* Sumbu Y (HTML Text, ZERO STRETCH, centered on grid lines) */
+.chart-y-axis {
+  position: relative;
+  height: 200px;
+  width: 28px;
+  margin-right: 14px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.chart-y-axis span {
+  position: absolute;
+  right: 0;
+  transform: translateY(-50%);
+  font-size: 11px;
+  font-weight: 500;
+  color: #94A3B8;
+  line-height: 1;
+}
+
+.chart-y-axis span:nth-child(1) { top: 0%; }
+.chart-y-axis span:nth-child(2) { top: 25%; }
+.chart-y-axis span:nth-child(3) { top: 50%; }
+.chart-y-axis span:nth-child(4) { top: 75%; }
+.chart-y-axis span:nth-child(5) { top: 100%; }
+
+/* Plot Area Container */
+.chart-plot-container {
+  position: relative;
+  flex: 1;
+  height: 200px;
+}
+
+/* 5 Grid Lines Horizontal */
+.chart-html-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.chart-html-grid-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.chart-html-grid-line:nth-child(1) { top: 0; }
+.chart-html-grid-line:nth-child(2) { top: 25%; }
+.chart-html-grid-line:nth-child(3) { top: 50%; }
+.chart-html-grid-line:nth-child(4) { top: 75%; }
+.chart-html-grid-line:nth-child(5) { top: 100%; }
+
+/* SVG Line Layer */
+.chart-svg-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  display: block;
+}
+
+/* Markers (Perfect Circles, Never Ovals!) */
+.chart-point-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 4;
+}
+
+.marker-blue-ring {
+  width: 14px;
+  height: 14px;
+  background-color: #ffffff;
+  border: 3.5px solid #1E6AFF;
+  box-shadow: 0 2px 6px rgba(30, 106, 255, 0.25);
+}
+
+.marker-purple-ring {
+  width: 14px;
+  height: 14px;
+  background-color: #ffffff;
+  border: 3.5px solid #706EE7;
+  box-shadow: 0 2px 6px rgba(112, 110, 231, 0.25);
+}
+
+/* Tooltip Badge at 13:00 (HTML Text, Never Stretched!) */
+.chart-html-tooltip {
+  position: absolute;
+  transform: translateX(-50%);
+  background-color: #EAEFF8;
+  border-radius: 8px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+  z-index: 6;
+  white-space: nowrap;
+}
+
+.tooltip-red-circle {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #EF4444;
+  flex-shrink: 0;
+}
+
+.tooltip-text-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tooltip-title-text {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #1E293B;
+  line-height: 1.1;
+}
+
+.tooltip-sub-text {
+  font-size: 9px;
+  font-weight: 400;
+  color: #64748B;
+  line-height: 1.1;
+}
+
+/* Sumbu X (HTML Text, ZERO STRETCH) */
+.chart-x-axis-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.chart-y-spacer {
+  width: 28px;
+  margin-right: 14px;
+  flex-shrink: 0;
+}
+
+.chart-x-axis {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  user-select: none;
+  padding: 0;
+}
+
+.chart-x-axis span {
+  font-size: 11px;
+  font-weight: 500;
+  color: #94A3B8;
+  line-height: 1;
+}
+
+/* Chart Bottom Row */
+.chart-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #F1F5F9;
+  padding-top: 14px;
+  margin-top: 6px;
+}
+
+.chart-bottom-note {
+  font-size: 12px;
+  color: var(--text-subtle);
+  margin: 0;
+}
+
+.chart-more-link {
+  font-size: 12px;
+  font-weight: 600;
+  color: #1E6AFF;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.chart-more-link:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
+   6. BOTTOM SECTION: 2 COLUMNS (Komunitas & Penyebab Stres)
+   ============================================================ */
+.bottom-dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.bottom-card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-card);
+  padding: 24px 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bottom-card-header h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 4px 0;
+}
+
+.bottom-card-header p {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Komunitas: Overlapping Avatars */
+.community-avatars-row {
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.community-avatar-item {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-left: -12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  overflow: hidden;
+  background-color: #E2E8F0;
+  transition: transform 0.2s ease;
+}
+
+.community-avatar-item:first-child {
+  margin-left: 0;
+}
+
+.community-avatar-item:hover {
+  transform: translateY(-4px) scale(1.08);
+  z-index: 10;
+}
+
+.community-avatar-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.community-footer-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: #1E6AFF;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding-top: 10px;
+  border-top: 1px solid #F1F5F9;
+}
+
+.community-footer-link:hover {
+  opacity: 0.85;
+}
+
+/* Penyebab Stres: Bubble Breakdown */
+.stress-causes-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 0 6px 0;
+}
+
+.bubbles-graphic-wrap {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  flex-shrink: 0;
+}
+
+.bubble-circle {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 12px;
+  position: absolute;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.bubble-circle:hover {
+  transform: scale(1.05);
+}
+
+.bubble-53 {
+  width: 92px;
+  height: 92px;
+  background-color: #293F6C;
+  top: 10px;
+  left: 0;
+  z-index: 4;
+}
+
+.bubble-41 {
+  width: 68px;
+  height: 68px;
+  background-color: #1E6AFF;
+  bottom: 0px;
+  right: 28px;
+  z-index: 3;
+}
+
+.bubble-26 {
+  width: 58px;
+  height: 58px;
+  background-color: #3B82F6;
+  top: 36px;
+  right: 0px;
+  z-index: 2;
+}
+
+.bubble-12 {
+  width: 44px;
+  height: 44px;
+  background-color: #60A5FA;
+  bottom: 6px;
+  left: 36px;
+  font-size: 10px;
+  z-index: 1;
+}
+
+/* Causes Breakdown List */
+.causes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.cause-item-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cause-pct-tag {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-dark);
+  min-width: 34px;
+}
+
+.cause-label-text {
+  font-size: 12px;
+  color: var(--text-subtle);
+  font-weight: 400;
+}
+
+/* ============================================================
+   7. RESPONSIVE MEDIA QUERIES
+   ============================================================ */
+@media (max-width: 1080px) {
+  .top-metric-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bottom-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 860px) {
+  .dashboard-layout {
+    flex-direction: column;
+  }
+  .dashboard-sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid #E2E8F0;
+    padding: 18px 20px;
+  }
+  .sidebar-nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .dashboard-main {
+    padding: 20px 16px;
+  }
+  .top-metric-grid {
+    grid-template-columns: 1fr;
+  }
+}
