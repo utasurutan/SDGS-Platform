@@ -30,7 +30,7 @@ export default function SignUp({ onNavigate }) {
     e.preventDefault();
     console.log("Sign up data:", formData);
     if (onNavigate) {
-      onNavigate("/preference");
+      onNavigate("/connect-device");
     }
   };
 

@@ -47,6 +47,8 @@ export default function SignIn({ onNavigate }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Sign in data:", formData);
+    // Setelah login berhasil, arahkan ke halaman hubungkan perangkat
+    if (onNavigate) onNavigate("/connect-device");
   };
 
   const handleLinkClick = (e, path) => {

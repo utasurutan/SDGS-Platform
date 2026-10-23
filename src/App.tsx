@@ -5,6 +5,7 @@ import SignIn from '../frontend/sign-in.jsx'
 import PreferencePage from '../frontend/preference.jsx'
 import ForgotPassword from '../frontend/forgot-password.jsx'
 import ResetPassword from '../frontend/reset-password.jsx'
+import ConnectDevice from '../frontend/connect-device.jsx'
 
 function App() {
   const [currentPath, setCurrentPath] = useState<string>(() => window.location.pathname)
@@ -40,6 +41,13 @@ function App() {
     currentPath.endsWith('sign-in.html')
   ) {
     return <SignIn onNavigate={navigate} />
+  }
+
+  if (
+    currentPath === '/connect-device' ||
+    currentPath === '/hubungkan-perangkat'
+  ) {
+    return <ConnectDevice onNavigate={navigate} />
   }
 
   if (

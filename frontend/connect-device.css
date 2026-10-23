@@ -1,0 +1,490 @@
+/* ==========================================================================
+   Connect Device Page Stylesheet
+   Premium, Modern Design for SmartWrist Band Connection Flow
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.cd-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f6fa;
+  font-family: "Inter", sans-serif;
+  padding: 40px 20px;
+}
+
+/* ── Card ── */
+.cd-card {
+  background: #ffffff;
+  border-radius: 28px;
+  width: 100%;
+  max-width: 520px;
+  padding: 44px 44px 36px;
+  box-shadow: 0 8px 48px rgba(15, 23, 42, 0.08), 0 2px 8px rgba(15, 23, 42, 0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: visible;
+}
+
+/* ── Header ── */
+.cd-header {
+  text-align: center;
+  margin-bottom: 28px;
+  width: 100%;
+}
+
+.cd-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #0f172a;
+  letter-spacing: -0.5px;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.cd-subtitle {
+  font-size: 15px;
+  font-weight: 400;
+  color: #64748b;
+  line-height: 1.55;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+/* ── Device Visual Area ── */
+.cd-visual {
+  position: relative;
+  width: 260px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+/* Soft circular glow background */
+.cd-glow-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, #e8eeff 0%, #f0f2ff 55%, transparent 80%);
+  width: 210px;
+  height: 210px;
+}
+
+/* Pulse rings for scanning animation */
+.cd-pulse-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 2px solid rgba(99, 130, 255, 0.25);
+  animation: cd-pulse 2.4s ease-out infinite;
+}
+
+.cd-pulse-ring:nth-child(2) {
+  width: 180px;
+  height: 180px;
+  animation-delay: 0s;
+}
+.cd-pulse-ring:nth-child(3) {
+  width: 230px;
+  height: 230px;
+  animation-delay: 0.6s;
+}
+.cd-pulse-ring:nth-child(4) {
+  width: 280px;
+  height: 280px;
+  animation-delay: 1.2s;
+}
+
+@keyframes cd-pulse {
+  0% {
+    opacity: 0.7;
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+  70% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+/* HRV floating badges */
+.cd-hrv-badge {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 5px 10px 5px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #0f172a;
+  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.10);
+  white-space: nowrap;
+  z-index: 3;
+}
+
+.cd-hrv-badge.left {
+  left: -18px;
+  top: 38px;
+  animation: cd-float-left 3s ease-in-out infinite;
+}
+
+.cd-hrv-badge.right {
+  right: -22px;
+  bottom: 34px;
+  animation: cd-float-right 3s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+@keyframes cd-float-left {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes cd-float-right {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.cd-hrv-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+  flex-shrink: 0;
+}
+
+.cd-hrv-wave {
+  display: flex;
+  align-items: center;
+  gap: 1.5px;
+  margin-right: 3px;
+}
+
+.cd-hrv-wave span {
+  display: block;
+  width: 3px;
+  background: #1E6AFF;
+  border-radius: 2px;
+  animation: cd-wave 1.2s ease-in-out infinite;
+}
+
+.cd-hrv-wave span:nth-child(1) { height: 6px; animation-delay: 0s; }
+.cd-hrv-wave span:nth-child(2) { height: 11px; animation-delay: 0.15s; }
+.cd-hrv-wave span:nth-child(3) { height: 7px; animation-delay: 0.3s; }
+.cd-hrv-wave span:nth-child(4) { height: 4px; animation-delay: 0.45s; }
+
+@keyframes cd-wave {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.55); }
+}
+
+/* ── Device Image ── */
+.cd-device-img {
+  position: relative;
+  z-index: 2;
+  width: 170px;
+  height: 170px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 28px rgba(30, 106, 255, 0.14));
+  animation: cd-device-float 4s ease-in-out infinite;
+}
+
+@keyframes cd-device-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ── Search Status Row ── */
+.cd-search-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  width: 100%;
+}
+
+.cd-search-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1E6AFF;
+  flex-shrink: 0;
+  animation: cd-dot-blink 1.4s ease-in-out infinite;
+}
+
+@keyframes cd-dot-blink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.75); }
+}
+
+.cd-search-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #475569;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cd-bluetooth-icon {
+  color: #1E6AFF;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Loading dots animation for "Mencari..." */
+.cd-loading-dots {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+  margin-left: 1px;
+}
+
+.cd-loading-dots span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #1E6AFF;
+  display: inline-block;
+  animation: cd-dots 1.4s ease-in-out infinite;
+}
+
+.cd-loading-dots span:nth-child(1) { animation-delay: 0s; }
+.cd-loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.cd-loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes cd-dots {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* ── Device Found Card ── */
+.cd-device-found {
+  width: 100%;
+  background: #f8f9fc;
+  border: 1.5px solid #e8eaef;
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.cd-device-found:hover {
+  border-color: #c7d3ff;
+  background: #f4f6ff;
+}
+
+.cd-device-icon-wrap {
+  width: 42px;
+  height: 42px;
+  background: #fff;
+  border: 1.5px solid #e4e7ef;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cd-device-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.cd-device-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 2px;
+}
+
+.cd-device-meta {
+  font-size: 12px;
+  font-weight: 400;
+  color: #94a3b8;
+}
+
+.cd-device-check {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #1E6AFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ── Skeleton shimmer (searching state) ── */
+.cd-device-skeleton {
+  width: 100%;
+  background: #f8f9fc;
+  border: 1.5px solid #e8eaef;
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.cd-skel-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  background: linear-gradient(90deg, #e8eaef 25%, #f4f5f8 50%, #e8eaef 75%);
+  background-size: 200% 100%;
+  animation: cd-shimmer 1.6s infinite;
+  flex-shrink: 0;
+}
+
+.cd-skel-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.cd-skel-line {
+  height: 10px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #e8eaef 25%, #f4f5f8 50%, #e8eaef 75%);
+  background-size: 200% 100%;
+  animation: cd-shimmer 1.6s infinite;
+}
+
+.cd-skel-line.short {
+  width: 60%;
+}
+
+@keyframes cd-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ── Connect Button ── */
+.cd-connect-btn {
+  width: 100%;
+  padding: 16px 24px;
+  background: #1E6AFF;
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 18px rgba(30, 106, 255, 0.28);
+  letter-spacing: 0.01em;
+}
+
+.cd-connect-btn:hover:not(:disabled) {
+  background: #1559e0;
+  box-shadow: 0 6px 24px rgba(30, 106, 255, 0.36);
+  transform: translateY(-1px);
+}
+
+.cd-connect-btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(30, 106, 255, 0.22);
+}
+
+.cd-connect-btn:disabled {
+  background: #93aef5;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Rotating icon inside button */
+.cd-btn-spin {
+  animation: cd-spin 1s linear infinite;
+  display: inline-flex;
+  align-items: center;
+}
+
+@keyframes cd-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ── Skip Link ── */
+.cd-skip-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #94a3b8;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.18s ease;
+  background: none;
+  border: none;
+  font-family: "Inter", sans-serif;
+}
+
+.cd-skip-link:hover {
+  color: #475569;
+  text-decoration: underline;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .cd-card {
+    padding: 32px 24px 28px;
+    border-radius: 20px;
+  }
+
+  .cd-title {
+    font-size: 26px;
+  }
+
+  .cd-visual {
+    width: 220px;
+    height: 170px;
+  }
+
+  .cd-device-img {
+    width: 140px;
+    height: 140px;
+  }
+
+  .cd-hrv-badge.left {
+    left: -8px;
+  }
+
+  .cd-hrv-badge.right {
+    right: -8px;
+  }
+}
