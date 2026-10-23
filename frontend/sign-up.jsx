@@ -83,7 +83,7 @@ export default function SignUp({ onNavigate }) {
 
   const inputClass = (key) => {
     if (!touched[key]) return "";
-    return errors[key] ? "input-error" : "input-success";
+    return errors[key] ? "input-error" : "";
   };
 
   return (
