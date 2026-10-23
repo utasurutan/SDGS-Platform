@@ -210,7 +210,7 @@
   font-weight: 600;
   cursor: pointer;
   font-family: inherit;
-  box-shadow: 0 4px 14px rgba(30, 106, 255, 0.28);
+  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.1);
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   align-items: center;
@@ -219,13 +219,13 @@
 
 .signin-submit-btn:hover {
   background-color: #165be0;
-  box-shadow: 0 6px 18px rgba(30, 106, 255, 0.38);
+  box-shadow: 4px 4px 12px 0 rgba(0, 0, 0, 0.1);
   transform: translateY(-1px);
 }
 
 .signin-submit-btn:active {
   transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(30, 106, 255, 0.25);
+  box-shadow: 0 6px 16px -2px rgba(30, 106, 255, 0.38);
 }
 
 /* --- Divider (Atau) --- */

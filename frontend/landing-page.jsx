@@ -117,9 +117,18 @@ function DataBarIcon() {
 
 export default function LandingPage({ onNavigate }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [scrollYOffset, setScrollYOffset] = useState(0);
   const showcaseRef = useRef(null);
+
+  useEffect(() => {
+    const handleNavScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleNavScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleNavScroll);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -151,16 +160,16 @@ export default function LandingPage({ onNavigate }) {
 
   return (
     <>
-      <header className="header-container">
+      <header className={`header-container${isScrolled ? ' header-scrolled' : ''}`}>
         {/* Sisi Kiri: Logo */}
         <a className="aura-sync-logo" href="#">AuraSync</a>
 
         {/* Tengah: 4 Menu Link (Desktop) */}
         <nav className="navbar-container">
           <ul className="navbar-links">
-            <li><a href="#fitur">Fitur & Teknologi</a></li>
+            <li><a href="#sambungkan-smartband">Fitur & Teknologi</a></li>
+            <li><a href="#dampak-stres">Dampak</a></li>
             <li><a href="#cara-kerja">Cara Kerja</a></li>
-            <li><a href="#ruang-tenang">Ruang Tenang</a></li>
             <li><a href="#tentang">Tentang Kami</a></li>
           </ul>
         </nav>
@@ -185,9 +194,9 @@ export default function LandingPage({ onNavigate }) {
         {isMobileMenuOpen && (
           <nav className="mobile-nav-menu">
             <ul>
-              <li><a href="#fitur" onClick={() => setIsMobileMenuOpen(false)}>Fitur & Teknologi</a></li>
+              <li><a href="#sambungkan-smartband" onClick={() => setIsMobileMenuOpen(false)}>Fitur & Teknologi</a></li>
+              <li><a href="#dampak-stres" onClick={() => setIsMobileMenuOpen(false)}>Dampak</a></li>
               <li><a href="#cara-kerja" onClick={() => setIsMobileMenuOpen(false)}>Cara Kerja</a></li>
-              <li><a href="#ruang-tenang" onClick={() => setIsMobileMenuOpen(false)}>Ruang Tenang</a></li>
               <li><a href="#tentang" onClick={() => setIsMobileMenuOpen(false)}>Tentang Kami</a></li>
             </ul>
           </nav>

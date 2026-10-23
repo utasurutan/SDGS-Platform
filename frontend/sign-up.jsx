@@ -3,7 +3,7 @@ import "./sign-up.css";
 import signupPoster from "../Assets/Picture/Signup Poster.png";
 import userPlusIcon from "../Assets/Icon/solar_user-plus-broken.png";
 import googleIcon from "../Assets/Icon/devicon_google.png";
-import { Eye, EyeOff, ArrowLeft } from "lucide-react";
+import { Eye, EyeOff, ArrowLeft, AlertCircle } from "lucide-react";
 
 export default function SignUp({ onNavigate }) {
   const [formData, setFormData] = useState({
@@ -16,22 +16,62 @@ export default function SignUp({ onNavigate }) {
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
+
+  const validate = (data) => {
+    const errs = {};
+    if (!data.fullname.trim()) errs.fullname = "Nama lengkap wajib diisi.";
+    if (!data.email.trim()) {
+      errs.email = "Alamat email wajib diisi.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+      errs.email = "Format email tidak valid.";
+    }
+    if (!data.password) {
+      errs.password = "Kata sandi wajib diisi.";
+    } else if (data.password.length < 8) {
+      errs.password = "Kata sandi minimal 8 karakter.";
+    }
+    if (!data.confirmPassword) {
+      errs.confirmPassword = "Konfirmasi kata sandi wajib diisi.";
+    } else if (data.password !== data.confirmPassword) {
+      errs.confirmPassword = "Kata sandi tidak cocok.";
+    }
+    if (!data.terms) errs.terms = "Kamu harus menyetujui ketentuan.";
+    return errs;
+  };
 
   const handleChange = (e) => {
     const { id, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [id === "confirm-password" ? "confirmPassword" : id]:
-        type === "checkbox" ? checked : value,
-    }));
+    const key = id === "confirm-password" ? "confirmPassword" : id;
+    const newData = {
+      ...formData,
+      [key]: type === "checkbox" ? checked : value,
+    };
+    setFormData(newData);
+    // Re-validate field yang sudah disentuh
+    if (touched[key]) {
+      const errs = validate(newData);
+      setErrors((prev) => ({ ...prev, [key]: errs[key] }));
+    }
+  };
+
+  const handleBlur = (e) => {
+    const key = e.target.id === "confirm-password" ? "confirmPassword" : e.target.id;
+    setTouched((prev) => ({ ...prev, [key]: true }));
+    const errs = validate(formData);
+    setErrors((prev) => ({ ...prev, [key]: errs[key] }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const errs = validate(formData);
+    setErrors(errs);
+    // Mark semua field sebagai touched
+    setTouched({ fullname: true, email: true, password: true, confirmPassword: true, terms: true });
+    if (Object.keys(errs).length > 0) return;
     console.log("Sign up data:", formData);
-    if (onNavigate) {
-      onNavigate("/connect-device");
-    }
+    if (onNavigate) onNavigate("/connect-device");
   };
 
   const handleLinkClick = (e, path) => {
@@ -39,6 +79,11 @@ export default function SignUp({ onNavigate }) {
       e.preventDefault();
       onNavigate(path);
     }
+  };
+
+  const inputClass = (key) => {
+    if (!touched[key]) return "";
+    return errors[key] ? "input-error" : "input-success";
   };
 
   return (
@@ -61,8 +106,8 @@ export default function SignUp({ onNavigate }) {
             </div>
           </div>
 
-          {/* Formulir Input */}
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} noValidate>
+            {/* Nama Lengkap */}
             <div className="input-group">
               <label htmlFor="fullname">
                 Nama Lengkap <span className="required">*</span>
@@ -72,11 +117,19 @@ export default function SignUp({ onNavigate }) {
                 id="fullname"
                 value={formData.fullname}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 placeholder="Masukkan nama lengkap anda"
-                required
+                className={inputClass("fullname")}
               />
+              {touched.fullname && errors.fullname && (
+                <span className="field-error">
+                  <AlertCircle size={13} />
+                  {errors.fullname}
+                </span>
+              )}
             </div>
 
+            {/* Alamat Email */}
             <div className="input-group">
               <label htmlFor="email">
                 Alamat Email <span className="required">*</span>
@@ -86,11 +139,19 @@ export default function SignUp({ onNavigate }) {
                 id="email"
                 value={formData.email}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 placeholder="Masukkan alamat email kamu disini"
-                required
+                className={inputClass("email")}
               />
+              {touched.email && errors.email && (
+                <span className="field-error">
+                  <AlertCircle size={13} />
+                  {errors.email}
+                </span>
+              )}
             </div>
 
+            {/* Kata Sandi */}
             <div className="input-group">
               <label htmlFor="password">
                 Kata Sandi <span className="required">*</span>
@@ -101,8 +162,9 @@ export default function SignUp({ onNavigate }) {
                   id="password"
                   value={formData.password}
                   onChange={handleChange}
-                  placeholder="Masukkan kata sandi kamu disini"
-                  required
+                  onBlur={handleBlur}
+                  placeholder="Minimal 8 karakter"
+                  className={inputClass("password")}
                 />
                 <button
                   type="button"
@@ -113,8 +175,15 @@ export default function SignUp({ onNavigate }) {
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
+              {touched.password && errors.password && (
+                <span className="field-error">
+                  <AlertCircle size={13} />
+                  {errors.password}
+                </span>
+              )}
             </div>
 
+            {/* Konfirmasi Kata Sandi */}
             <div className="input-group">
               <label htmlFor="confirm-password">
                 Konfirmasi Kata Sandi <span className="required">*</span>
@@ -125,27 +194,35 @@ export default function SignUp({ onNavigate }) {
                   id="confirm-password"
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  placeholder="Konfirmasi kata sandi kamu"
-                  required
+                  onBlur={handleBlur}
+                  placeholder="Ulangi kata sandi kamu"
+                  className={inputClass("confirmPassword")}
                 />
                 <button
                   type="button"
                   className="password-toggle-btn"
                   onClick={() => setShowConfirmPassword((prev) => !prev)}
-                  aria-label={showConfirmPassword ? "Sembunyikan konfirmasi kata sandi" : "Tampilkan konfirmasi kata sandi"}
+                  aria-label={showConfirmPassword ? "Sembunyikan" : "Tampilkan"}
                 >
                   {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
+              {touched.confirmPassword && errors.confirmPassword && (
+                <span className="field-error">
+                  <AlertCircle size={13} />
+                  {errors.confirmPassword}
+                </span>
+              )}
             </div>
 
-            <div className="checkbox-group">
+            {/* Checkbox Terms */}
+            <div className={`checkbox-group${touched.terms && errors.terms ? " checkbox-error" : ""}`}>
               <input
                 type="checkbox"
                 id="terms"
                 checked={formData.terms}
                 onChange={handleChange}
-                required
+                onBlur={handleBlur}
               />
               <label htmlFor="terms">
                 Saya setuju dengan{" "}
@@ -154,8 +231,14 @@ export default function SignUp({ onNavigate }) {
                 </a>
               </label>
             </div>
+            {touched.terms && errors.terms && (
+              <span className="field-error field-error-terms">
+                <AlertCircle size={13} />
+                {errors.terms}
+              </span>
+            )}
 
-            {/* Tombol & Aksi */}
+            {/* Tombol Daftar */}
             <button type="submit" className="btn-daftar">
               Daftar
             </button>
@@ -171,15 +254,13 @@ export default function SignUp({ onNavigate }) {
 
             <p className="login-redirect">
               Sudah memiliki akun?{" "}
-              <span className="highlight">
-                <a
-                  href="/sign-in"
-                  onClick={(e) => handleLinkClick(e, "/sign-in")}
-                  className="link-blue"
-                >
-                  Masuk di sini
-                </a>
-              </span>
+              <a
+                href="/sign-in"
+                onClick={(e) => handleLinkClick(e, "/sign-in")}
+                className="link-blue"
+              >
+                Masuk di sini
+              </a>
             </p>
 
             <div className="back-home">
