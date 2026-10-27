@@ -399,44 +399,44 @@ export default function SettingsPage({ onNavigate }) {
             ============================================================ */}
         <section className="settings-card" aria-labelledby="card-profile-title">
           <div className={`card-top-bar ${isEditingProfile ? "editing" : ""}`}>
-            <div className="card-title-header-row">
+            <div className="card-title-wrap">
               <h2 id="card-profile-title" className="card-main-title">
                 Profil & Identitas Diri
               </h2>
-              <div className="card-actions">
-                {isEditingProfile ? (
-                  <>
-                    <button
-                      type="button"
-                      className="btn-cancel"
-                      onClick={handleCancel}
-                    >
-                      Batalkan
-                    </button>
-                    <button
-                      type="button"
-                      className="btn-save"
-                      onClick={handleSave}
-                    >
-                      Simpan
-                    </button>
-                  </>
-                ) : (
+              <p className="card-main-desc">
+                Informasi dasar yang digunakan untuk merubah identitas mu
+              </p>
+            </div>
+            <div className="card-actions">
+              {isEditingProfile ? (
+                <>
                   <button
                     type="button"
-                    className="btn-edit-profile"
-                    onClick={() => setIsEditingProfile(true)}
-                    aria-label="Edit Profil"
+                    className="btn-cancel"
+                    onClick={handleCancel}
                   >
-                    <Pencil size={13} />
-                    <span>Edit</span>
+                    Batalkan
                   </button>
-                )}
-              </div>
+                  <button
+                    type="button"
+                    className="btn-save"
+                    onClick={handleSave}
+                  >
+                    Simpan
+                  </button>
+                </>
+              ) : (
+                <button
+                  type="button"
+                  className="btn-edit-profile"
+                  onClick={() => setIsEditingProfile(true)}
+                  aria-label="Edit Profil"
+                >
+                  <Pencil size={15} />
+                  <span>Edit</span>
+                </button>
+              )}
             </div>
-            <p className="card-main-desc">
-              Informasi dasar yang digunakan untuk merubah identitas mu
-            </p>
           </div>
 
           {/* Avatar Section */}
