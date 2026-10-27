@@ -19,6 +19,8 @@ import {
   ZoomOut,
   RotateCw,
   X,
+  Menu,
+  Pencil,
 } from "lucide-react";
 
 export default function SettingsPage({ onNavigate }) {
@@ -75,9 +77,16 @@ export default function SettingsPage({ onNavigate }) {
   // Sidebar active menu
   const [activeMenu, setActiveMenu] = useState("Pengaturan");
 
+  // State menu drawer versi mobile
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // State mode edit profil (user baru bisa edit jika klik tombol Edit bergambar pensil)
+  const [isEditingProfile, setIsEditingProfile] = useState(false);
+
   // Handler Navigasi Sidebar
   const handleNavClick = (menuName, routePath) => {
     setActiveMenu(menuName);
+    setIsMobileMenuOpen(false);
     if (menuName === "Keluar") {
       const confirmLogout = window.confirm("Apakah kamu yakin ingin keluar?");
       if (confirmLogout) {
@@ -152,7 +161,8 @@ export default function SettingsPage({ onNavigate }) {
       console.warn("Gagal menyimpan ke localStorage:", e);
     }
 
-    setToastMessage("Pengaturan akun berhasil disimpan!");
+    setIsEditingProfile(false);
+    setToastMessage("Pengaturan profil berhasil disimpan!");
     setTimeout(() => {
       setToastMessage("");
     }, 3000);
@@ -164,27 +174,103 @@ export default function SettingsPage({ onNavigate }) {
     setEmail(initialUser.email || "frenkiede@gmail.com");
     setPassword("••••••••");
     setAvatar(initialUser.picture || null);
-    setCalmTarget(localStorage.getItem("aurasync_calm_target") || "20 mnt");
+    setLanguage("Bahasa Indonesia");
+    setIsEditingProfile(false);
+  };
+
+  // Auto-save handlers untuk preferensi & privasi (agar tidak butuh tombol simpan di atas)
+  const handleSelectCalmTarget = (duration) => {
+    setCalmTarget(duration);
+    localStorage.setItem("aurasync_calm_target", duration);
+  };
+
+  const handleToggleBreathReminder = (checked) => {
+    setBreathReminder(checked);
+    localStorage.setItem("aurasync_breath_reminder", String(checked));
+  };
+
+  const handleToggleWorkFocus = (checked) => {
+    setWorkFocusMode(checked);
+    localStorage.setItem("aurasync_work_focus", String(checked));
+  };
+
+  const handleToggleEncryption = (checked) => {
+    setEndToEndEncryption(checked);
+    localStorage.setItem("aurasync_encryption", String(checked));
+  };
+
+  const handleToggleWeeklyEmail = (checked) => {
+    setWeeklyReflectionEmail(checked);
+    localStorage.setItem("aurasync_weekly_email", String(checked));
   };
 
   return (
     <div className="settings-layout">
       {/* ============================================================
-          1. SIDEBAR NAVIGATION
+          0. MOBILE BACKDROP & TOP APP BAR
           ============================================================ */}
-      <aside className="settings-sidebar" aria-label="Sidebar Navigasi">
+      <div
+        className={`sidebar-backdrop ${isMobileMenuOpen ? "active" : ""}`}
+        onClick={() => setIsMobileMenuOpen(false)}
+        aria-hidden="true"
+      />
+
+      <header className="mobile-top-bar" aria-label="Mobile Navigation Bar">
+        <button
+          type="button"
+          className="mobile-menu-toggle"
+          onClick={() => setIsMobileMenuOpen(true)}
+          aria-label="Buka Navigasi"
+        >
+          <Menu size={20} />
+        </button>
+
+        <a
+          href="/"
+          onClick={(e) => {
+            e.preventDefault();
+            if (onNavigate) onNavigate("/");
+          }}
+          className="mobile-brand-link"
+        >
+          <span className="brand-text-aurasync">AuraSync</span>
+        </a>
+
+        {/* Spacer kanan untuk menjaga posisi logo AuraSync tetap seimbang di tengah */}
+        <div className="mobile-top-spacer" aria-hidden="true" />
+      </header>
+
+      {/* ============================================================
+          1. SIDEBAR NAVIGATION (Desktop Fixed & Mobile Slide Drawer)
+          ============================================================ */}
+      <aside
+        className={`settings-sidebar ${isMobileMenuOpen ? "mobile-open" : ""}`}
+        aria-label="Sidebar Navigasi"
+      >
         <div>
-          {/* Brand Logo AuraSync */}
-          <a
-            href="/"
-            onClick={(e) => {
-              e.preventDefault();
-              if (onNavigate) onNavigate("/");
-            }}
-            className="sidebar-brand"
-          >
-            <span className="brand-text-aurasync">AuraSync</span>
-          </a>
+          {/* Header Sidebar / Brand */}
+          <div className="sidebar-brand-wrapper">
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsMobileMenuOpen(false);
+                if (onNavigate) onNavigate("/");
+              }}
+              className="sidebar-brand"
+            >
+              <span className="brand-text-aurasync">AuraSync</span>
+            </a>
+
+            <button
+              type="button"
+              className="sidebar-close-btn"
+              onClick={() => setIsMobileMenuOpen(false)}
+              aria-label="Tutup Menu"
+            >
+              <X size={18} />
+            </button>
+          </div>
 
           <nav className="sidebar-nav">
             {/* Category: MENU */}
@@ -312,7 +398,7 @@ export default function SettingsPage({ onNavigate }) {
             CARD 1: PROFIL & IDENTITAS DIRI
             ============================================================ */}
         <section className="settings-card" aria-labelledby="card-profile-title">
-          <div className="card-top-bar">
+          <div className={`card-top-bar ${isEditingProfile ? "editing" : ""}`}>
             <div className="card-title-wrap">
               <h2 id="card-profile-title" className="card-main-title">
                 Profil & Identitas Diri
@@ -322,20 +408,34 @@ export default function SettingsPage({ onNavigate }) {
               </p>
             </div>
             <div className="card-actions">
-              <button
-                type="button"
-                className="btn-cancel"
-                onClick={handleCancel}
-              >
-                Batalkan
-              </button>
-              <button
-                type="button"
-                className="btn-save"
-                onClick={handleSave}
-              >
-                Simpan
-              </button>
+              {isEditingProfile ? (
+                <>
+                  <button
+                    type="button"
+                    className="btn-cancel"
+                    onClick={handleCancel}
+                  >
+                    Batalkan
+                  </button>
+                  <button
+                    type="button"
+                    className="btn-save"
+                    onClick={handleSave}
+                  >
+                    Simpan
+                  </button>
+                </>
+              ) : (
+                <button
+                  type="button"
+                  className="btn-edit-profile"
+                  onClick={() => setIsEditingProfile(true)}
+                  aria-label="Edit Profil"
+                >
+                  <Pencil size={15} />
+                  <span>Edit</span>
+                </button>
+              )}
             </div>
           </div>
 
@@ -351,36 +451,54 @@ export default function SettingsPage({ onNavigate }) {
               ) : (
                 <User size={30} className="avatar-user-icon" />
               )}
+              {isEditingProfile && (
+                <button
+                  type="button"
+                  className="avatar-edit-badge"
+                  onClick={() => fileInputRef.current && fileInputRef.current.click()}
+                  title="Ganti Foto Profil"
+                  aria-label="Ganti Foto Profil"
+                >
+                  <Pencil size={12} />
+                </button>
+              )}
             </div>
 
-            <div className="avatar-actions-wrap">
-              <div className="avatar-btn-row">
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  style={{ display: "none" }}
-                  accept="image/png, image/jpeg"
-                  onChange={handlePhotoUpload}
-                />
-                <button
-                  type="button"
-                  className="btn-upload-photo"
-                  onClick={() => fileInputRef.current && fileInputRef.current.click()}
-                >
-                  Unggah foto baru
-                </button>
-                <button
-                  type="button"
-                  className="btn-delete-photo"
-                  onClick={handleDeletePhoto}
-                >
-                  Hapus
-                </button>
+            {isEditingProfile ? (
+              <div className="avatar-actions-wrap">
+                <div className="avatar-btn-row">
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    style={{ display: "none" }}
+                    accept="image/png, image/jpeg"
+                    onChange={handlePhotoUpload}
+                  />
+                  <button
+                    type="button"
+                    className="btn-upload-photo"
+                    onClick={() => fileInputRef.current && fileInputRef.current.click()}
+                  >
+                    Unggah foto baru
+                  </button>
+                  <button
+                    type="button"
+                    className="btn-delete-photo"
+                    onClick={handleDeletePhoto}
+                  >
+                    Hapus
+                  </button>
+                </div>
+                <p className="avatar-format-hint">
+                  Format yang didukung JPG, PNG. Maksimum 2 MB
+                </p>
               </div>
-              <p className="avatar-format-hint">
-                Format yang didukung JPG, PNG. Maksimum 2 MB
-              </p>
-            </div>
+            ) : (
+              <div className="avatar-view-info">
+                <span className="avatar-user-name">{name || "Pengguna"}</span>
+                <span className="avatar-user-email">{email || "email@aurasync.id"}</span>
+              </div>
+            )}
           </div>
 
           {/* Form Grid (Nama, Email, Kata Sandi, Bahasa) */}
@@ -394,10 +512,11 @@ export default function SettingsPage({ onNavigate }) {
                 <input
                   id="fullname-input"
                   type="text"
-                  className="settings-input"
+                  className={`settings-input ${!isEditingProfile ? "readonly-input" : ""}`}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Masukkan nama lengkap"
+                  readOnly={!isEditingProfile}
                 />
               </div>
             </div>
@@ -411,10 +530,11 @@ export default function SettingsPage({ onNavigate }) {
                 <input
                   id="email-input"
                   type="email"
-                  className="settings-input"
+                  className={`settings-input ${!isEditingProfile ? "readonly-input" : ""}`}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="nama@email.com"
+                  readOnly={!isEditingProfile}
                 />
               </div>
             </div>
@@ -428,10 +548,11 @@ export default function SettingsPage({ onNavigate }) {
                 <input
                   id="password-input"
                   type={showPassword ? "text" : "password"}
-                  className="settings-input"
+                  className={`settings-input ${!isEditingProfile ? "readonly-input" : ""}`}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Kata sandi"
+                  readOnly={!isEditingProfile}
                 />
                 <button
                   type="button"
@@ -452,9 +573,10 @@ export default function SettingsPage({ onNavigate }) {
               <div className="input-container">
                 <select
                   id="language-select"
-                  className="settings-select"
+                  className={`settings-select ${!isEditingProfile ? "readonly-select" : ""}`}
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
+                  disabled={!isEditingProfile}
                 >
                   <option value="Bahasa Indonesia">Bahasa Indonesia</option>
                   <option value="English">English</option>
@@ -494,7 +616,7 @@ export default function SettingsPage({ onNavigate }) {
                   key={duration}
                   type="button"
                   className={`pill-option-btn ${calmTarget === duration ? "active" : ""}`}
-                  onClick={() => setCalmTarget(duration)}
+                  onClick={() => handleSelectCalmTarget(duration)}
                 >
                   {duration}
                 </button>
@@ -514,7 +636,7 @@ export default function SettingsPage({ onNavigate }) {
               <input
                 type="checkbox"
                 checked={breathReminder}
-                onChange={(e) => setBreathReminder(e.target.checked)}
+                onChange={(e) => handleToggleBreathReminder(e.target.checked)}
                 aria-label="Pengingat Nafas Harian"
               />
               <span className="toggle-slider" />
@@ -533,7 +655,7 @@ export default function SettingsPage({ onNavigate }) {
               <input
                 type="checkbox"
                 checked={workFocusMode}
-                onChange={(e) => setWorkFocusMode(e.target.checked)}
+                onChange={(e) => handleToggleWorkFocus(e.target.checked)}
                 aria-label="Mode Fokus Selama Jam Kerja"
               />
               <span className="toggle-slider" />
@@ -568,7 +690,7 @@ export default function SettingsPage({ onNavigate }) {
               <input
                 type="checkbox"
                 checked={endToEndEncryption}
-                onChange={(e) => setEndToEndEncryption(e.target.checked)}
+                onChange={(e) => handleToggleEncryption(e.target.checked)}
                 aria-label="Enkripsi Menyeluruh"
               />
               <span className="toggle-slider" />
@@ -587,7 +709,7 @@ export default function SettingsPage({ onNavigate }) {
               <input
                 type="checkbox"
                 checked={weeklyReflectionEmail}
-                onChange={(e) => setWeeklyReflectionEmail(e.target.checked)}
+                onChange={(e) => handleToggleWeeklyEmail(e.target.checked)}
                 aria-label="Rangkuman Refleksi Mingguan"
               />
               <span className="toggle-slider" />
@@ -612,6 +734,50 @@ export default function SettingsPage({ onNavigate }) {
           onCancel={handleCropCancel}
         />
       )}
+
+      {/* Mobile Bottom Navigation Dock */}
+      <nav className="mobile-bottom-nav" aria-label="Navigasi Bawah Mobile">
+        <button
+          type="button"
+          className={`mobile-nav-item ${activeMenu === "Dashboard" ? "active" : ""}`}
+          onClick={() => handleNavClick("Dashboard", "/dashboard")}
+        >
+          <LayoutGrid size={20} />
+          <span>Beranda</span>
+        </button>
+        <button
+          type="button"
+          className={`mobile-nav-item ${activeMenu === "Analisis" ? "active" : ""}`}
+          onClick={() => handleNavClick("Analisis")}
+        >
+          <BarChart2 size={20} />
+          <span>Analisis</span>
+        </button>
+        <button
+          type="button"
+          className={`mobile-nav-item ${activeMenu === "Hubungkan" ? "active" : ""}`}
+          onClick={() => handleNavClick("Hubungkan", "/connect-device")}
+        >
+          <Link2 size={20} />
+          <span>Perangkat</span>
+        </button>
+        <button
+          type="button"
+          className={`mobile-nav-item ${activeMenu === "Komunitas" ? "active" : ""}`}
+          onClick={() => handleNavClick("Komunitas")}
+        >
+          <Users size={20} />
+          <span>Komunitas</span>
+        </button>
+        <button
+          type="button"
+          className={`mobile-nav-item ${activeMenu === "Pengaturan" ? "active" : ""}`}
+          onClick={() => handleNavClick("Pengaturan", "/settings")}
+        >
+          <SettingsIcon size={20} />
+          <span>Akun</span>
+        </button>
+      </nav>
     </div>
   );
 }

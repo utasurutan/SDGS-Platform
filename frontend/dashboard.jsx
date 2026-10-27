@@ -31,6 +31,8 @@ import avatar2 from "../Assets/Picture/Ellipse 32.png";
 import avatar3 from "../Assets/Picture/Ellipse 33.png";
 import avatar4 from "../Assets/Picture/Ellipse 34.png";
 import avatar5 from "../Assets/Picture/Ellipse 35.png";
+import stethoscopeIcon from "../Assets/Icon/solar_stethoscope-bold (1).png";
+import pulseIcon from "../Assets/Icon/solar_pulse-linear (1).png";
 
 export default function Dashboard({ onNavigate }) {
   // Ambil data akun yang login (Google atau Form)
@@ -370,7 +372,11 @@ export default function Dashboard({ onNavigate }) {
           <div className="metric-card">
             <div className="metric-card-header">
               <div className="metric-card-icon-wrap">
-                <Activity size={18} />
+                <img
+                  src={stethoscopeIcon}
+                  alt="Ikon Rata-rata BPM"
+                  className="metric-card-icon-img"
+                />
               </div>
               <span className="metric-top-text">Rata-rata BPM Harian</span>
             </div>
@@ -389,7 +395,11 @@ export default function Dashboard({ onNavigate }) {
           <div className="metric-card">
             <div className="metric-card-header">
               <div className="metric-card-icon-wrap">
-                <Activity size={18} />
+                <img
+                  src={pulseIcon}
+                  alt="Ikon Variabilitas Detak Jantung"
+                  className="metric-card-icon-img"
+                />
               </div>
               <span className="metric-top-text">Variabilitas Detak Jantung</span>
             </div>
@@ -404,13 +414,17 @@ export default function Dashboard({ onNavigate }) {
             </p>
           </div>
 
-          {/* Card 3: Skor Stres */}
+          {/* Card 3: Skor Strees */}
           <div className="metric-card">
             <div className="metric-card-header">
               <div className="metric-card-icon-wrap">
-                <Activity size={18} />
+                <img
+                  src={pulseIcon}
+                  alt="Ikon Skor Strees"
+                  className="metric-card-icon-img"
+                />
               </div>
-              <span className="metric-top-text">Skor Stres</span>
+              <span className="metric-top-text">Skor Strees</span>
             </div>
             <div className="metric-number-row">
               <span className="metric-main-number">
