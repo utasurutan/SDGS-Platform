@@ -1,0 +1,640 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+/* ============================================================
+   AuraSync - FAQ (Frequently Asked Questions) Stylesheet
+   Presisi desain sesuai mockup Figma
+   ============================================================ */
+
+:root {
+  --primary-blue: #1E6AFF;
+  --primary-hover: #1557db;
+  --text-dark: #0F172A;
+  --text-muted: #8E98A8;
+  --text-subtle: #64748B;
+  --border-card: #F1F5F9;
+  --bg-page: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --radius-lg: 20px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+  --shadow-card: 0 2px 14px rgba(15, 23, 42, 0.02);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-page);
+  color: var(--text-dark);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Layout Container --- */
+.faq-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background-color: var(--bg-page);
+  padding-left: 215px;
+  box-sizing: border-box;
+}
+
+/* ============================================================
+   1. SIDEBAR (Identik dengan Dashboard & Settings)
+   ============================================================ */
+.faq-sidebar {
+  width: 215px;
+  min-width: 215px;
+  background-color: #ffffff;
+  border-right: 1px solid #edf2f7;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 22px 14px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  height: 100vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  z-index: 50;
+}
+
+.faq-sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+.faq-sidebar::-webkit-scrollbar-thumb {
+  background-color: #e2e8f0;
+  border-radius: 4px;
+}
+
+/* --- Sidebar Brand & Close Wrapper --- */
+.sidebar-brand-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-left: 6px;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.sidebar-close-btn {
+  display: none;
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: var(--text-subtle);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.sidebar-close-btn:hover {
+  background-color: #F1F5F9;
+  color: var(--text-dark);
+}
+
+.brand-text-aurasync {
+  font-size: 20px;
+  font-weight: 800;
+  color: #1E6AFF;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+/* Mobile backdrop & app bar hidden on desktop */
+.sidebar-backdrop {
+  display: none;
+}
+
+.mobile-top-bar {
+  display: none;
+}
+
+.mobile-bottom-nav {
+  display: none;
+}
+
+/* --- Navigation Groups --- */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.sidebar-category {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.category-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 3px 10px;
+  margin-bottom: 2px;
+}
+
+.nav-item-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 8px 11px;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #293F6C;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.nav-item-btn .nav-icon {
+  color: #293F6C;
+  transition: color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.nav-item-btn:hover {
+  background-color: #F1F5F9;
+  color: #1E293B;
+}
+
+.nav-item-btn.active {
+  background-color: #1E6AFF;
+  color: #FFFFFF !important;
+  box-shadow: 0 3px 10px rgba(30, 106, 255, 0.24);
+}
+
+.nav-item-btn.active .nav-icon {
+  color: #FFFFFF !important;
+}
+
+/* --- Bottom Card in Sidebar (IoT Smart Band) --- */
+.sidebar-device-card {
+  margin-top: 18px;
+  background-color: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 11px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.device-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.device-badge-title {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #1E6AFF;
+}
+
+.device-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #1E6AFF;
+  box-shadow: 0 0 0 2px rgba(30, 106, 255, 0.2);
+}
+
+.device-battery-pct {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #64748B;
+}
+
+.device-card-subtitle {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.device-card-btn {
+  background-color: #1E6AFF;
+  color: #ffffff;
+  border: none;
+  border-radius: 7px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  width: 100%;
+}
+
+.device-card-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.device-card-btn:active {
+  transform: scale(0.98);
+}
+
+/* ============================================================
+   2. MAIN CONTENT AREA (FAQ)
+   ============================================================ */
+.faq-main {
+  flex: 1;
+  padding: 40px 48px 60px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 980px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* --- Header Section --- */
+.faq-header {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.faq-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.faq-subtitle {
+  font-size: 13.5px;
+  color: var(--text-subtle);
+  margin: 0;
+  font-weight: 400;
+}
+
+/* --- Accordion List Container --- */
+.faq-accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+/* --- Accordion Card --- */
+.faq-accordion-card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+  overflow: hidden;
+}
+
+.faq-accordion-card:hover {
+  border-color: #E2E8F0;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+}
+
+.faq-accordion-card.open {
+  border-color: #E2E8F0;
+  box-shadow: 0 6px 24px rgba(15, 23, 42, 0.04);
+}
+
+/* Header Button */
+.faq-accordion-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  gap: 16px;
+  user-select: none;
+}
+
+.faq-question-text {
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.faq-icon-wrap {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dark);
+  flex-shrink: 0;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.faq-accordion-card:hover .faq-icon-wrap {
+  color: #1E6AFF;
+}
+
+/* Body / Answer Content */
+.faq-accordion-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.faq-accordion-content.expanded {
+  max-height: 300px;
+  opacity: 1;
+}
+
+.faq-content-inner {
+  padding: 0 30px 24px 30px;
+}
+
+.faq-answer-text {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-subtle);
+  line-height: 1.68;
+  margin: 0;
+}
+
+/* ============================================================
+   3. RESPONSIVE MEDIA QUERIES (Mobile & Tablet)
+   ============================================================ */
+
+/* --- Tablet Devices (<= 1080px) --- */
+@media (max-width: 1080px) {
+  .faq-main {
+    padding: 30px 32px 48px 32px;
+  }
+}
+
+/* --- Mobile & Small Tablet Devices (<= 860px) --- */
+@media (max-width: 860px) {
+  /* Layout Flow */
+  .faq-layout {
+    flex-direction: column;
+    padding-left: 0;
+    width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+  }
+
+  /* Backdrop Overlay for Slide-Out Drawer */
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .sidebar-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Mobile Top App Bar */
+  .mobile-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    padding: 0 16px;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid #EDF2F7;
+    z-index: 850;
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    background: #FFFFFF;
+    color: #1E293B;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .mobile-menu-toggle:active {
+    transform: scale(0.94);
+    background: #F1F5F9;
+  }
+
+  .mobile-brand-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .mobile-brand-link .brand-text-aurasync {
+    font-size: 20px;
+    font-weight: 800;
+    color: #1E6AFF;
+    letter-spacing: -0.02em;
+  }
+
+  .mobile-top-spacer {
+    width: 38px;
+    height: 38px;
+    visibility: hidden;
+  }
+
+  /* Slide-Out Sidebar Drawer */
+  .faq-sidebar {
+    width: 280px;
+    max-width: 82vw;
+    height: 100vh;
+    height: 100dvh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: none;
+    border-right: 1px solid #E2E8F0;
+    padding: 20px 16px;
+    justify-content: space-between;
+    overflow-y: auto;
+  }
+
+  .faq-sidebar.mobile-open {
+    transform: translateX(0);
+    box-shadow: 10px 0 32px rgba(15, 23, 42, 0.18);
+  }
+
+  .sidebar-brand-wrapper {
+    margin-bottom: 22px;
+    padding: 0 4px;
+  }
+
+  .sidebar-close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    border: 1px solid #E2E8F0;
+    background: #F8FAFC;
+    color: #64748B;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .sidebar-close-btn:active {
+    transform: scale(0.92);
+  }
+
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .sidebar-device-card {
+    margin-top: 24px;
+  }
+
+  /* Mobile Bottom Dock Navigation */
+  .mobile-bottom-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 850;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid #E2E8F0;
+    padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px)) 4px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+  }
+
+  .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    background: none;
+    border: none;
+    padding: 6px 4px;
+    cursor: pointer;
+    color: #64748B;
+    font-family: inherit;
+    font-size: 10.5px;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    position: relative;
+    flex: 1;
+  }
+
+  .mobile-nav-item:active {
+    transform: scale(0.92);
+  }
+
+  .mobile-nav-item.active {
+    color: #1E6AFF;
+    font-weight: 700;
+  }
+
+  .mobile-nav-item.active svg {
+    color: #1E6AFF;
+    transform: translateY(-1px);
+  }
+
+  .mobile-nav-item.active::after {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #1E6AFF;
+  }
+
+  /* Main Body on Mobile */
+  .faq-main {
+    padding: 20px 16px calc(76px + env(safe-area-inset-bottom, 16px)) 16px;
+    gap: 18px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .faq-title {
+    font-size: 21px;
+    font-weight: 700;
+  }
+
+  .faq-subtitle {
+    font-size: 13px;
+  }
+
+  .faq-accordion-header {
+    padding: 18px 18px;
+    gap: 12px;
+  }
+
+  .faq-question-text {
+    font-size: 14.5px;
+  }
+
+  .faq-content-inner {
+    padding: 0 18px 18px 18px;
+  }
+
+  .faq-answer-text {
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+}

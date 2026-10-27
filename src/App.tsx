@@ -8,6 +8,7 @@ import ResetPassword from '../frontend/reset-password.jsx'
 import ConnectDevice from '../frontend/connect-device.jsx'
 import Dashboard from '../frontend/dashboard.jsx'
 import SettingsPage from '../frontend/settings.jsx'
+import FaqPage from '../frontend/faq.jsx'
 
 function App() {
   const [currentPath, setCurrentPath] = useState<string>(() => window.location.pathname)
@@ -61,6 +62,16 @@ function App() {
     currentPath.endsWith('settings.html')
   ) {
     return <SettingsPage onNavigate={navigate} />
+  }
+
+  if (
+    currentPath === '/faq' ||
+    currentPath === '/bantuan' ||
+    currentPath === '/pertanyaan' ||
+    currentPath === '/frontend/faq.html' ||
+    currentPath.endsWith('faq.html')
+  ) {
+    return <FaqPage onNavigate={navigate} />
   }
 
   if (

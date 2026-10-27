@@ -345,7 +345,7 @@ export default function SettingsPage({ onNavigate }) {
               <button
                 type="button"
                 className={`nav-item-btn ${activeMenu === "Faq" ? "active" : ""}`}
-                onClick={() => handleNavClick("Faq")}
+                onClick={() => handleNavClick("Faq", "/faq")}
               >
                 <HelpCircle size={16} className="nav-icon" />
                 <span>Faq</span>
