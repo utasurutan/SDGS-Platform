@@ -9,6 +9,8 @@ import ConnectDevice from '../frontend/connect-device.jsx'
 import Dashboard from '../frontend/dashboard.jsx'
 import SettingsPage from '../frontend/settings.jsx'
 import FaqPage from '../frontend/faq.jsx'
+import KomunitasPage from '../frontend/komunitas.jsx'
+import BeritaPage from '../frontend/berita.jsx'
 
 function App() {
   const [currentPath, setCurrentPath] = useState<string>(() => window.location.pathname)
@@ -72,6 +74,27 @@ function App() {
     currentPath.endsWith('faq.html')
   ) {
     return <FaqPage onNavigate={navigate} />
+  }
+
+  if (
+    currentPath === '/komunitas' ||
+    currentPath === '/community' ||
+    currentPath === '/frontend/komunitas.html' ||
+    currentPath.endsWith('komunitas.html')
+  ) {
+    return <KomunitasPage onNavigate={navigate} />
+  }
+
+  if (
+    currentPath === '/berita' ||
+    currentPath.startsWith('/berita/') ||
+    currentPath === '/news' ||
+    currentPath === '/edukasi' ||
+    currentPath === '/frontend/berita.html' ||
+    currentPath.endsWith('berita.html')
+  ) {
+    const slug = currentPath.startsWith('/berita/') ? currentPath.replace('/berita/', '') : null
+    return <BeritaPage onNavigate={navigate} currentSlug={slug} />
   }
 
   if (

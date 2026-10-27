@@ -308,7 +308,7 @@ export default function SettingsPage({ onNavigate }) {
               <button
                 type="button"
                 className={`nav-item-btn ${activeMenu === "Komunitas" ? "active" : ""}`}
-                onClick={() => handleNavClick("Komunitas")}
+                onClick={() => handleNavClick("Komunitas", "/komunitas")}
               >
                 <Users size={16} className="nav-icon" />
                 <span>Komunitas</span>
