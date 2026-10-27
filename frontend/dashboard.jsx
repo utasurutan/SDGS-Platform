@@ -58,6 +58,7 @@ export default function Dashboard({ onNavigate }) {
   // Data metriks real-time dari dashboardService (siap dihubungkan ke Firebase)
   const [metrics, setMetrics] = useState(null);
 
+
   useEffect(() => {
     // Berlangganan data real-time (mock / Firebase ready)
     const unsubscribe = subscribeToDashboardData(user.email, (updatedData) => {
@@ -677,6 +678,10 @@ export default function Dashboard({ onNavigate }) {
               <div className="causes-list">
                 {(metrics?.causes || DEFAULT_DASHBOARD_DATA.causes).map((item, idx) => (
                   <div key={idx} className="cause-item-row">
+                    <span
+                      className="cause-color-dot"
+                      style={{ backgroundColor: item.color }}
+                    />
                     <span className="cause-pct-tag">{item.percentage}%</span>
                     <span className="cause-label-text">{item.label}</span>
                   </div>

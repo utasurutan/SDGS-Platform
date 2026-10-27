@@ -8,7 +8,6 @@
 
 html {
     scroll-behavior: smooth;
-    overflow-y: auto;
 }
 
 /* Fix scroll offset untuk fixed navbar (~80px tinggi navbar) */
@@ -21,8 +20,7 @@ body {
     font-family: 'Plus Jakarta Sans', sans-serif;
     background-color: #f8fafc;
     color: #0f172a;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow-x: clip;
 }
 
 /* Header Container (3-Column Grid: Kiri - Tengah - Kanan) */
