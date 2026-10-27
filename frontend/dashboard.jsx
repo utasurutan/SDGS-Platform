@@ -6,7 +6,7 @@ import {
   Smile,
   Users,
   Link2,
-  BookOpen,
+  MessageSquare,
   Settings,
   HelpCircle,
   LogOut,
@@ -155,11 +155,11 @@ export default function Dashboard({ onNavigate }) {
               </button>
               <button
                 type="button"
-                className={`nav-item-btn ${activeMenu === "Jurnal AI" ? "active" : ""}`}
-                onClick={() => handleNavClick("Jurnal AI")}
+                className={`nav-item-btn ${activeMenu === "Chat AI" ? "active" : ""}`}
+                onClick={() => handleNavClick("Chat AI")}
               >
-                <BookOpen size={16} className="nav-icon" />
-                <span>Jurnal AI</span>
+                <MessageSquare size={16} className="nav-icon" />
+                <span>Chat AI</span>
               </button>
             </div>
 
