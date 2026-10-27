@@ -15,6 +15,10 @@ import {
   EyeOff,
   ChevronDown,
   Check,
+  ZoomIn,
+  ZoomOut,
+  RotateCw,
+  X,
 } from "lucide-react";
 
 export default function SettingsPage({ onNavigate }) {
@@ -85,20 +89,39 @@ export default function SettingsPage({ onNavigate }) {
     }
   };
 
-  // Upload foto avatar baru
+  // Crop modal states
+  const [cropModalOpen, setCropModalOpen] = useState(false);
+  const [cropImageSrc, setCropImageSrc] = useState(null);
+
+  // Upload foto avatar baru - buka cropper modal
   const handlePhotoUpload = (e) => {
     const file = e.target.files && e.target.files[0];
     if (file) {
-      if (file.size > 2 * 1024 * 1024) {
-        alert("Ukuran foto melebihi batas 2 MB.");
+      if (file.size > 5 * 1024 * 1024) {
+        alert("Ukuran foto melebihi batas 5 MB.");
         return;
       }
       const reader = new FileReader();
       reader.onload = (event) => {
-        setAvatar(event.target.result);
+        setCropImageSrc(event.target.result);
+        setCropModalOpen(true);
       };
       reader.readAsDataURL(file);
+      e.target.value = "";
     }
+  };
+
+  // Callback saat crop berhasil diterapkan
+  const handleCropApply = (croppedDataUrl) => {
+    setAvatar(croppedDataUrl);
+    setCropModalOpen(false);
+    setCropImageSrc(null);
+  };
+
+  // Batalkan crop
+  const handleCropCancel = () => {
+    setCropModalOpen(false);
+    setCropImageSrc(null);
   };
 
   // Hapus foto avatar
@@ -580,6 +603,325 @@ export default function SettingsPage({ onNavigate }) {
           <span>{toastMessage}</span>
         </div>
       )}
+
+      {/* Image Cropper Modal */}
+      {cropModalOpen && cropImageSrc && (
+        <ImageCropperModal
+          imageSrc={cropImageSrc}
+          onApply={handleCropApply}
+          onCancel={handleCropCancel}
+        />
+      )}
+    </div>
+  );
+}
+
+/**
+ * ImageCropperModal – Komponen modal interaktif pemotong foto profil lingkaran
+ * Mendukung drag/pan, zoom slider + wheel, rotasi 90°, dan export canvas resolusi tinggi.
+ */
+function ImageCropperModal({ imageSrc, onApply, onCancel }) {
+  const [zoom, setZoom] = useState(1);
+  const [rotation, setRotation] = useState(0);
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartRef = useRef({ x: 0, y: 0, initialOffsetX: 0, initialOffsetY: 0 });
+  const [imgNatural, setImgNatural] = useState({ width: 1, height: 1 });
+  const boxRef = useRef(null);
+
+  const VIEWPORT_DIAMETER = 240;
+
+  useEffect(() => {
+    const img = new Image();
+    img.src = imageSrc;
+    img.onload = () => {
+      setImgNatural({ width: img.naturalWidth, height: img.naturalHeight });
+    };
+  }, [imageSrc]);
+
+  // Skala dasar agar gambar menutupi area lingkaran 240px
+  const baseScale = Math.max(
+    VIEWPORT_DIAMETER / (imgNatural.width || 1),
+    VIEWPORT_DIAMETER / (imgNatural.height || 1)
+  );
+  const renderW = imgNatural.width * baseScale;
+  const renderH = imgNatural.height * baseScale;
+
+  // Mouse handlers
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    dragStartRef.current = {
+      x: e.clientX,
+      y: e.clientY,
+      initialOffsetX: offset.x,
+      initialOffsetY: offset.y,
+    };
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging) return;
+    const dx = e.clientX - dragStartRef.current.x;
+    const dy = e.clientY - dragStartRef.current.y;
+    setOffset({
+      x: dragStartRef.current.initialOffsetX + dx,
+      y: dragStartRef.current.initialOffsetY + dy,
+    });
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  // Touch handlers
+  const handleTouchStart = (e) => {
+    if (e.touches.length === 1) {
+      setIsDragging(true);
+      dragStartRef.current = {
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY,
+        initialOffsetX: offset.x,
+        initialOffsetY: offset.y,
+      };
+    }
+  };
+
+  const handleTouchMove = (e) => {
+    if (!isDragging || e.touches.length !== 1) return;
+    const dx = e.touches[0].clientX - dragStartRef.current.x;
+    const dy = e.touches[0].clientY - dragStartRef.current.y;
+    setOffset({
+      x: dragStartRef.current.initialOffsetX + dx,
+      y: dragStartRef.current.initialOffsetY + dy,
+    });
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
+
+  // Mouse scroll wheel zoom
+  const handleWheel = (e) => {
+    e.preventDefault();
+    const delta = e.deltaY < 0 ? 0.08 : -0.08;
+    setZoom((prev) => Math.min(3, Math.max(1, +(prev + delta).toFixed(2))));
+  };
+
+  // Reset posisi & zoom
+  const handleReset = () => {
+    setZoom(1);
+    setRotation(0);
+    setOffset({ x: 0, y: 0 });
+  };
+
+  // Putar foto 90 derajat searah jarum jam
+  const handleRotate = () => {
+    setRotation((prev) => (prev + 90) % 360);
+  };
+
+  // Ekspor gambar hasil crop resolusi tinggi (400x400 px)
+  const handleConfirmCrop = () => {
+    const OUTPUT_SIZE = 400;
+    const canvas = document.createElement("canvas");
+    canvas.width = OUTPUT_SIZE;
+    canvas.height = OUTPUT_SIZE;
+    const ctx = canvas.getContext("2d");
+
+    if (!ctx) return;
+
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = "high";
+
+    const M = OUTPUT_SIZE / VIEWPORT_DIAMETER;
+    const canvasW = renderW * zoom * M;
+    const canvasH = renderH * zoom * M;
+
+    const img = new Image();
+    img.src = imageSrc;
+    img.onload = () => {
+      ctx.save();
+      ctx.translate(OUTPUT_SIZE / 2 + offset.x * M, OUTPUT_SIZE / 2 + offset.y * M);
+      ctx.rotate((rotation * Math.PI) / 180);
+      ctx.drawImage(img, -canvasW / 2, -canvasH / 2, canvasW, canvasH);
+      ctx.restore();
+
+      const croppedUrl = canvas.toDataURL("image/jpeg", 0.92);
+      onApply(croppedUrl);
+    };
+  };
+
+  return (
+    <div className="cropper-modal-backdrop" role="dialog" aria-modal="true">
+      <div className="cropper-modal-card">
+        {/* Header */}
+        <div className="cropper-header">
+          <div className="cropper-title-wrap">
+            <h3 className="cropper-title">Potong Foto Profil</h3>
+            <p className="cropper-desc">
+              Geser dan sesuaikan foto agar pas di dalam lingkaran profil
+            </p>
+          </div>
+          <button
+            type="button"
+            className="cropper-close-btn"
+            onClick={onCancel}
+            title="Tutup"
+            aria-label="Tutup"
+          >
+            <X size={18} />
+          </button>
+        </div>
+
+        {/* Viewport Box */}
+        <div className="cropper-body">
+          <div
+            ref={boxRef}
+            className="crop-preview-box"
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            onWheel={handleWheel}
+            title="Klik dan geser untuk memposisikan foto"
+          >
+            <div
+              className="crop-image-wrapper"
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: `translate(-50%, -50%) translate(${offset.x}px, ${offset.y}px) rotate(${rotation}deg)`,
+                width: `${renderW * zoom}px`,
+                height: `${renderH * zoom}px`,
+                transition: isDragging ? "none" : "transform 0.08s ease-out",
+              }}
+            >
+              <img
+                src={imageSrc}
+                alt="Pratinjau potong"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  display: "block",
+                  pointerEvents: "none",
+                }}
+              />
+            </div>
+
+            {/* Circular Mask Overlay */}
+            <svg
+              viewBox="0 0 320 320"
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                pointerEvents: "none",
+              }}
+            >
+              <defs>
+                <mask id="cropCircleMask">
+                  <rect x="0" y="0" width="320" height="320" fill="white" />
+                  <circle cx="160" cy="160" r="120" fill="black" />
+                </mask>
+              </defs>
+              <rect
+                x="0"
+                y="0"
+                width="320"
+                height="320"
+                fill="rgba(15, 23, 42, 0.65)"
+                mask="url(#cropCircleMask)"
+              />
+              <circle
+                cx="160"
+                cy="160"
+                r="120"
+                fill="none"
+                stroke="#ffffff"
+                strokeWidth="2.5"
+                strokeDasharray="4 4"
+              />
+            </svg>
+          </div>
+
+          {/* Controls */}
+          <div className="cropper-controls">
+            {/* Zoom Slider */}
+            <div className="cropper-slider-row">
+              <button
+                type="button"
+                className="cropper-icon-btn"
+                onClick={() => setZoom((prev) => Math.max(1, +(prev - 0.1).toFixed(2)))}
+                title="Perkecil"
+                aria-label="Perkecil"
+              >
+                <ZoomOut size={16} />
+              </button>
+              <input
+                type="range"
+                min="1"
+                max="3"
+                step="0.05"
+                value={zoom}
+                onChange={(e) => setZoom(parseFloat(e.target.value))}
+                className="cropper-zoom-slider"
+                aria-label="Tingkat Zoom Foto"
+              />
+              <button
+                type="button"
+                className="cropper-icon-btn"
+                onClick={() => setZoom((prev) => Math.min(3, +(prev + 0.1).toFixed(2)))}
+                title="Perbesar"
+                aria-label="Perbesar"
+              >
+                <ZoomIn size={16} />
+              </button>
+            </div>
+
+            {/* Aux Buttons */}
+            <div className="cropper-aux-row">
+              <button
+                type="button"
+                className="btn-rotate-photo"
+                onClick={handleRotate}
+              >
+                <RotateCw size={14} />
+                <span>Putar 90°</span>
+              </button>
+              <button
+                type="button"
+                className="btn-reset-crop"
+                onClick={handleReset}
+              >
+                Reset Posisi
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="cropper-footer">
+          <button
+            type="button"
+            className="btn-crop-cancel"
+            onClick={onCancel}
+          >
+            Batal
+          </button>
+          <button
+            type="button"
+            className="btn-crop-apply"
+            onClick={handleConfirmCrop}
+          >
+            <Check size={16} />
+            <span>Terapkan Foto</span>
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

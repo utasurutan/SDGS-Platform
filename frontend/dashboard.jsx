@@ -22,6 +22,8 @@ import {
   Moon,
   Sparkles,
   Zap,
+  Menu,
+  X,
 } from "lucide-react";
 import { subscribeToDashboardData, DEFAULT_DASHBOARD_DATA } from "./dashboardService.js";
 import avatar1 from "../Assets/Picture/Ellipse 31.png";
@@ -49,6 +51,9 @@ export default function Dashboard({ onNavigate }) {
   // State menu navigasi sidebar yang sedang aktif
   const [activeMenu, setActiveMenu] = useState("Dashboard");
 
+  // State drawer navigasi versi mobile
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   // State mode smartband (fokus | relaksasi | tidur)
   const [activeMode, setActiveMode] = useState("fokus");
 
@@ -57,7 +62,6 @@ export default function Dashboard({ onNavigate }) {
 
   // Data metriks real-time dari dashboardService (siap dihubungkan ke Firebase)
   const [metrics, setMetrics] = useState(null);
-
 
   useEffect(() => {
     // Berlangganan data real-time (mock / Firebase ready)
@@ -78,6 +82,7 @@ export default function Dashboard({ onNavigate }) {
   // Navigasi handler
   const handleNavClick = (menuName, routePath) => {
     setActiveMenu(menuName);
+    setIsMobileMenuOpen(false);
     if (menuName === "Keluar") {
       handleLogout();
     } else if (routePath && onNavigate) {
@@ -88,21 +93,101 @@ export default function Dashboard({ onNavigate }) {
   return (
     <div className="dashboard-layout">
       {/* ============================================================
-          1. SIDEBAR NAVIGATION
+          0. MOBILE BACKDROP & TOP APP BAR
           ============================================================ */}
-      <aside className="dashboard-sidebar" aria-label="Sidebar Navigasi">
-        <div>
-          {/* Logo Brand AuraSync (Tanpa Icon Hati) */}
-          <a
-            href="/"
-            onClick={(e) => {
-              e.preventDefault();
-              if (onNavigate) onNavigate("/");
-            }}
-            className="sidebar-brand"
+      <div
+        className={`sidebar-backdrop ${isMobileMenuOpen ? "active" : ""}`}
+        onClick={() => setIsMobileMenuOpen(false)}
+        aria-hidden="true"
+      />
+
+      <header className="mobile-top-bar" aria-label="Mobile Navigation Bar">
+        <button
+          type="button"
+          className="mobile-menu-toggle"
+          onClick={() => setIsMobileMenuOpen(true)}
+          aria-label="Buka Navigasi"
+        >
+          <Menu size={20} />
+        </button>
+
+        <a
+          href="/"
+          onClick={(e) => {
+            e.preventDefault();
+            if (onNavigate) onNavigate("/");
+          }}
+          className="mobile-brand-link"
+        >
+          <span className="brand-text-aurasync">AuraSync</span>
+        </a>
+
+        <div className="mobile-top-actions">
+          <button
+            type="button"
+            className="mobile-icon-btn"
+            title="Notifikasi"
+            aria-label="Notifikasi"
           >
-            <span className="brand-text-aurasync">AuraSync</span>
-          </a>
+            <Bell size={18} />
+            <span className="notification-dot" />
+          </button>
+
+          <button
+            type="button"
+            className="mobile-user-avatar-btn"
+            title="Pengaturan Profil"
+            onClick={() => {
+              if (onNavigate) onNavigate("/settings");
+            }}
+            aria-label="Profil Pengguna"
+          >
+            {user.picture ? (
+              <img
+                src={user.picture}
+                alt={user.name || "Foto Profil"}
+                className="user-avatar-img"
+              />
+            ) : (
+              <div className="user-avatar-fallback">
+                {(user.name || "K").charAt(0).toUpperCase()}
+              </div>
+            )}
+          </button>
+        </div>
+      </header>
+
+      {/* ============================================================
+          1. SIDEBAR NAVIGATION (Desktop Fixed & Mobile Slide Drawer)
+          ============================================================ */}
+      <aside
+        className={`dashboard-sidebar ${isMobileMenuOpen ? "mobile-open" : ""}`}
+        aria-label="Sidebar Navigasi"
+      >
+        <div>
+          {/* Header Sidebar / Brand */}
+          <div className="sidebar-brand-wrapper">
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsMobileMenuOpen(false);
+                if (onNavigate) onNavigate("/");
+              }}
+              className="sidebar-brand"
+            >
+              <span className="brand-text-aurasync">AuraSync</span>
+            </a>
+
+            <button
+              type="button"
+              className="sidebar-close-btn"
+              onClick={() => setIsMobileMenuOpen(false)}
+              aria-label="Tutup Menu"
+            >
+              <X size={18} />
+            </button>
+          </div>
 
           <nav className="sidebar-nav">
             {/* Category: MENU */}
@@ -691,6 +776,52 @@ export default function Dashboard({ onNavigate }) {
           </div>
         </section>
       </main>
+
+      {/* ============================================================
+          7. MOBILE BOTTOM NAVIGATION DOCK
+          ============================================================ */}
+      <nav className="mobile-bottom-nav" aria-label="Navigasi Bawah Mobile">
+        <button
+          type="button"
+          className={`mobile-nav-item ${activeMenu === "Dashboard" ? "active" : ""}`}
+          onClick={() => handleNavClick("Dashboard", "/dashboard")}
+        >
+          <LayoutGrid size={20} />
+          <span>Beranda</span>
+        </button>
+        <button
+          type="button"
+          className={`mobile-nav-item ${activeMenu === "Analisis" ? "active" : ""}`}
+          onClick={() => handleNavClick("Analisis")}
+        >
+          <BarChart2 size={20} />
+          <span>Analisis</span>
+        </button>
+        <button
+          type="button"
+          className={`mobile-nav-item ${activeMenu === "Hubungkan" ? "active" : ""}`}
+          onClick={() => handleNavClick("Hubungkan", "/connect-device")}
+        >
+          <Link2 size={20} />
+          <span>Perangkat</span>
+        </button>
+        <button
+          type="button"
+          className={`mobile-nav-item ${activeMenu === "Komunitas" ? "active" : ""}`}
+          onClick={() => handleNavClick("Komunitas")}
+        >
+          <Users size={20} />
+          <span>Komunitas</span>
+        </button>
+        <button
+          type="button"
+          className={`mobile-nav-item ${activeMenu === "Pengaturan" ? "active" : ""}`}
+          onClick={() => handleNavClick("Pengaturan", "/settings")}
+        >
+          <Settings size={20} />
+          <span>Akun</span>
+        </button>
+      </nav>
     </div>
   );
 }

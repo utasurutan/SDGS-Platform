@@ -77,14 +77,36 @@ body {
   border-radius: 4px;
 }
 
-/* --- Brand Logo (AuraSync - No Heart Icon) --- */
+/* --- Sidebar Brand & Close Wrapper --- */
+.sidebar-brand-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding-left: 6px;
+}
+
 .sidebar-brand {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 20px;
-  padding-left: 6px;
   text-decoration: none;
+}
+
+.sidebar-close-btn {
+  display: none;
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: var(--text-subtle);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.sidebar-close-btn:hover {
+  background-color: #F1F5F9;
+  color: var(--text-dark);
 }
 
 .brand-text-aurasync {
@@ -93,6 +115,19 @@ body {
   color: #1E6AFF;
   letter-spacing: -0.03em;
   line-height: 1;
+}
+
+/* Mobile backdrop & app bar hidden on desktop */
+.sidebar-backdrop {
+  display: none;
+}
+
+.mobile-top-bar {
+  display: none;
+}
+
+.mobile-bottom-nav {
+  display: none;
 }
 
 /* --- Navigation Groups --- */
@@ -1086,42 +1121,556 @@ body {
 }
 
 /* ============================================================
-   7. RESPONSIVE MEDIA QUERIES
+   7. RESPONSIVE MEDIA QUERIES (Mobile & Tablet Precision)
    ============================================================ */
+
+/* --- Tablet Devices (<= 1080px) --- */
 @media (max-width: 1080px) {
   .top-metric-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
   .bottom-dashboard-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .dashboard-main {
+    padding: 24px 28px 40px 28px;
   }
 }
 
+/* --- Mobile & Small Tablet Devices (<= 860px) --- */
 @media (max-width: 860px) {
+  /* Layout Flow */
   .dashboard-layout {
     flex-direction: column;
     padding-left: 0;
-  }
-  .dashboard-sidebar {
     width: 100%;
-    height: auto;
+    min-width: 0;
+    overflow-x: hidden;
+  }
+
+  /* Backdrop Overlay for Slide-Out Drawer */
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .sidebar-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Mobile Top App Bar */
+  .mobile-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    padding: 0 16px;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid #EDF2F7;
+    z-index: 850;
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    background: #FFFFFF;
+    color: #1E293B;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .mobile-menu-toggle:active {
+    transform: scale(0.94);
+    background: #F1F5F9;
+  }
+
+  .mobile-brand-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+  }
+
+  .mobile-brand-link .brand-text-aurasync {
+    font-size: 20px;
+    font-weight: 800;
+    color: #1E6AFF;
+    letter-spacing: -0.02em;
+  }
+
+  .mobile-top-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .mobile-icon-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid #E2E8F0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sidebar-icon-color);
+    cursor: pointer;
     position: relative;
-    top: auto;
-    left: auto;
-    bottom: auto;
-    border-right: none;
-    border-bottom: 1px solid #E2E8F0;
-    padding: 18px 20px;
+    transition: all 0.2s ease;
   }
-  .sidebar-nav {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+
+  .mobile-icon-btn:active {
+    transform: scale(0.94);
+    background: #F8FAFC;
   }
-  .dashboard-main {
+
+  .mobile-user-avatar-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    padding: 0;
+    border: 2px solid #E2E8F0;
+    background: none;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s ease;
+  }
+
+  .mobile-user-avatar-btn:active {
+    transform: scale(0.94);
+  }
+
+  .mobile-user-avatar-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Slide-Out Sidebar Drawer */
+  .dashboard-sidebar {
+    width: 280px;
+    max-width: 82vw;
+    height: 100vh;
+    height: 100dvh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: none;
+    border-right: 1px solid #E2E8F0;
     padding: 20px 16px;
+    justify-content: space-between;
+    overflow-y: auto;
   }
+
+  .dashboard-sidebar.mobile-open {
+    transform: translateX(0);
+    box-shadow: 10px 0 32px rgba(15, 23, 42, 0.18);
+  }
+
+  .sidebar-brand-wrapper {
+    margin-bottom: 22px;
+    padding: 0 4px;
+  }
+
+  .sidebar-close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    border: 1px solid #E2E8F0;
+    background: #F8FAFC;
+    color: #64748B;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .sidebar-close-btn:active {
+    transform: scale(0.92);
+  }
+
+  .sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .sidebar-device-card {
+    margin-top: 24px;
+  }
+
+  /* Mobile Bottom Dock Navigation */
+  .mobile-bottom-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 850;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid #E2E8F0;
+    padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px)) 4px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+  }
+
+  .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    background: none;
+    border: none;
+    padding: 6px 4px;
+    cursor: pointer;
+    color: #64748B;
+    font-family: inherit;
+    font-size: 10.5px;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+    position: relative;
+    flex: 1;
+  }
+
+  .mobile-nav-item:active {
+    transform: scale(0.92);
+  }
+
+  .mobile-nav-item.active {
+    color: #1E6AFF;
+    font-weight: 700;
+  }
+
+  .mobile-nav-item.active svg {
+    color: #1E6AFF;
+    transform: translateY(-1px);
+  }
+
+  .mobile-nav-item.active::after {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #1E6AFF;
+  }
+
+  /* Main Dashboard Body on Mobile */
+  .dashboard-main {
+    padding: 18px 16px calc(76px + env(safe-area-inset-bottom, 16px)) 16px;
+    gap: 18px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  /* Header Greeting */
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .dashboard-header .header-actions {
+    display: none;
+  }
+
+  .welcome-title {
+    font-size: 21px;
+    font-weight: 700;
+  }
+
+  .welcome-subtitle {
+    font-size: 13px;
+  }
+
+  /* Top Metric Cards: Clean 1 Column Stack */
   .top-metric-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .metric-card {
+    padding: 16px 18px;
+    border-radius: 16px;
+    gap: 8px;
+  }
+
+  .metric-main-number {
+    font-size: 34px;
+  }
+
+  .metric-sub-number {
+    font-size: 18px;
+  }
+
+  /* Smart Watch Band Banner on Mobile */
+  .device-status-banner {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px;
+    gap: 14px;
+    border-radius: 16px;
+  }
+
+  .banner-divider {
+    display: none;
+  }
+
+  .banner-left-info {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .banner-mid-info {
+    width: 100%;
+    justify-content: space-between;
+    border-top: 1px solid #F1F5F9;
+    padding-top: 12px;
+  }
+
+  .banner-mode-switcher {
+    width: 100%;
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    background: #F1F5F9;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+
+  .mode-tab-btn {
+    flex: 1;
+    justify-content: center;
+    padding: 8px 6px;
+    font-size: 11px;
+    text-align: center;
+  }
+
+  .mode-tab-btn span {
+    white-space: nowrap;
+  }
+
+  /* Chart Card Container on Mobile */
+  .chart-card-container {
+    padding: 18px 16px 14px 16px;
+    border-radius: 16px;
+    gap: 14px;
+    overflow: hidden;
+  }
+
+  .chart-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .chart-title-wrap h2 {
+    font-size: 16.5px;
+  }
+
+  .chart-title-wrap p {
+    font-size: 12px;
+  }
+
+  .chart-controls-wrap {
+    width: 100%;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .chart-legend {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .chart-time-tabs {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background: #F1F5F9;
+    border-radius: 8px;
+    padding: 3px;
+    box-sizing: border-box;
+  }
+
+  .time-tab-link {
+    flex: 1;
+    text-align: center;
+    padding: 6px 4px;
+    border-radius: 6px;
+    font-size: 11.5px;
+  }
+
+  .time-tab-link.active {
+    background: #FFFFFF;
+    color: #1E6AFF;
+    font-weight: 600;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  }
+
+  .chart-y-axis {
+    width: 24px;
+    margin-right: 8px;
+    height: 180px;
+  }
+
+  .chart-y-axis span {
+    font-size: 10px;
+  }
+
+  .chart-plot-container {
+    height: 180px;
+  }
+
+  .chart-y-spacer {
+    width: 24px;
+    margin-right: 8px;
+  }
+
+  .chart-x-axis span {
+    font-size: 9.5px;
+  }
+
+  .chart-html-tooltip {
+    padding: 4px 8px;
+  }
+
+  .tooltip-title-text {
+    font-size: 9.5px;
+  }
+
+  .tooltip-sub-text {
+    font-size: 8px;
+  }
+
+  .chart-bottom-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .chart-bottom-note {
+    font-size: 11.5px;
+  }
+
+  .chart-more-link {
+    font-size: 11.5px;
+  }
+
+  /* Bottom Cards Grid on Mobile */
+  .bottom-dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .bottom-card {
+    padding: 18px 16px;
+    border-radius: 16px;
+  }
+
+  .community-avatars-row {
+    padding: 14px 0;
+  }
+
+  .community-avatar-item {
+    width: 42px;
+    height: 42px;
+    margin-left: -10px;
+    font-size: 16px;
+  }
+}
+
+/* --- Small Phone Devices (<= 520px) --- */
+@media (max-width: 520px) {
+  /* Hide alternate timestamps on dense mobile displays to avoid text overlap */
+  .chart-x-axis span:nth-child(2),
+  .chart-x-axis span:nth-child(4),
+  .chart-x-axis span:nth-child(6),
+  .chart-x-axis span:nth-child(8) {
+    display: none;
+  }
+
+  /* Stress Causes: Clean vertical stack for graphic and breakdown list */
+  .stress-causes-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 0 2px 0;
+  }
+
+  .bubbles-graphic-wrap {
+    width: 175px;
+    height: 155px;
+    margin: 0 auto;
+    flex-shrink: 0;
+  }
+
+  .causes-list {
+    width: 100%;
+  }
+
+  .mode-tab-btn {
+    padding: 7px 4px;
+    font-size: 10.5px;
+    gap: 3px;
+  }
+}
+
+/* --- Ultra-compact Phones (<= 375px) --- */
+@media (max-width: 375px) {
+  .welcome-title {
+    font-size: 19px;
+  }
+
+  .metric-main-number {
+    font-size: 30px;
+  }
+
+  .mode-tab-btn {
+    font-size: 9.5px;
+    padding: 6px 2px;
+  }
+
+  .mobile-nav-item {
+    font-size: 9.5px;
+    padding: 5px 2px;
   }
 }
