@@ -7,6 +7,7 @@ import ForgotPassword from '../frontend/forgot-password.jsx'
 import ResetPassword from '../frontend/reset-password.jsx'
 import ConnectDevice from '../frontend/connect-device.jsx'
 import Dashboard from '../frontend/dashboard.jsx'
+import SettingsPage from '../frontend/settings.jsx'
 
 function App() {
   const [currentPath, setCurrentPath] = useState<string>(() => window.location.pathname)
@@ -51,6 +52,15 @@ function App() {
     currentPath.endsWith('dashboard.html')
   ) {
     return <Dashboard onNavigate={navigate} />
+  }
+
+  if (
+    currentPath === '/settings' ||
+    currentPath === '/pengaturan' ||
+    currentPath === '/frontend/settings.html' ||
+    currentPath.endsWith('settings.html')
+  ) {
+    return <SettingsPage onNavigate={navigate} />
   }
 
   if (

@@ -169,7 +169,7 @@ export default function Dashboard({ onNavigate }) {
               <button
                 type="button"
                 className={`nav-item-btn ${activeMenu === "Pengaturan" ? "active" : ""}`}
-                onClick={() => handleNavClick("Pengaturan")}
+                onClick={() => handleNavClick("Pengaturan", "/settings")}
               >
                 <Settings size={16} className="nav-icon" />
                 <span>Pengaturan</span>
