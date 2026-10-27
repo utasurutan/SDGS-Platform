@@ -320,52 +320,6 @@ export default function FaqPage({ onNavigate }) {
           })}
         </div>
       </main>
-
-      {/* ============================================================
-          3. MOBILE BOTTOM NAVIGATION DOCK
-          ============================================================ */}
-      <nav className="mobile-bottom-nav" aria-label="Navigasi Bawah Mobile">
-        <button
-          type="button"
-          className={`mobile-nav-item ${activeMenu === "Dashboard" ? "active" : ""}`}
-          onClick={() => handleNavClick("Dashboard", "/dashboard")}
-        >
-          <LayoutGrid size={20} />
-          <span>Beranda</span>
-        </button>
-        <button
-          type="button"
-          className={`mobile-nav-item ${activeMenu === "Analisis" ? "active" : ""}`}
-          onClick={() => handleNavClick("Analisis")}
-        >
-          <BarChart2 size={20} />
-          <span>Analisis</span>
-        </button>
-        <button
-          type="button"
-          className={`mobile-nav-item ${activeMenu === "Hubungkan" ? "active" : ""}`}
-          onClick={() => handleNavClick("Hubungkan", "/connect-device")}
-        >
-          <Link2 size={20} />
-          <span>Perangkat</span>
-        </button>
-        <button
-          type="button"
-          className={`mobile-nav-item ${activeMenu === "Komunitas" ? "active" : ""}`}
-          onClick={() => handleNavClick("Komunitas")}
-        >
-          <Users size={20} />
-          <span>Komunitas</span>
-        </button>
-        <button
-          type="button"
-          className={`mobile-nav-item ${activeMenu === "Pengaturan" ? "active" : ""}`}
-          onClick={() => handleNavClick("Pengaturan", "/settings")}
-        >
-          <SettingsIcon size={20} />
-          <span>Akun</span>
-        </button>
-      </nav>
     </div>
   );
 }

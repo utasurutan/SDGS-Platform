@@ -540,71 +540,9 @@ body {
     margin-top: 24px;
   }
 
-  /* Mobile Bottom Dock Navigation */
-  .mobile-bottom-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 850;
-    background: rgba(255, 255, 255, 0.94);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-top: 1px solid #E2E8F0;
-    padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px)) 4px;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
-  }
-
-  .mobile-nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
-    background: none;
-    border: none;
-    padding: 6px 4px;
-    cursor: pointer;
-    color: #64748B;
-    font-family: inherit;
-    font-size: 10.5px;
-    font-weight: 500;
-    border-radius: 10px;
-    transition: all 0.2s ease;
-    position: relative;
-    flex: 1;
-  }
-
-  .mobile-nav-item:active {
-    transform: scale(0.92);
-  }
-
-  .mobile-nav-item.active {
-    color: #1E6AFF;
-    font-weight: 700;
-  }
-
-  .mobile-nav-item.active svg {
-    color: #1E6AFF;
-    transform: translateY(-1px);
-  }
-
-  .mobile-nav-item.active::after {
-    content: "";
-    position: absolute;
-    bottom: 2px;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background-color: #1E6AFF;
-  }
-
-  /* Main Body on Mobile */
+  /* Main Body on Mobile (no bottom navbar, clean padding) */
   .faq-main {
-    padding: 20px 16px calc(76px + env(safe-area-inset-bottom, 16px)) 16px;
+    padding: 20px 16px calc(28px + env(safe-area-inset-bottom, 16px)) 16px;
     gap: 18px;
     width: 100%;
     max-width: 100%;
