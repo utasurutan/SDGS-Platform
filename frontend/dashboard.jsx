@@ -108,7 +108,6 @@ export default function Dashboard({ onNavigate }) {
         }}
         onMobileOpen={() => setIsMobileMenuOpen(true)}
         sidebarClassName="shared-sidebar"
-        showLogoIcon={true}
         deviceBattery={metrics?.device?.battery || 97}
         deviceSubtitle={metrics?.device?.status ? "D18 Tersambung" : "D18 Belum Terhubung"}
         deviceBtnText="Sambung Sekarang"

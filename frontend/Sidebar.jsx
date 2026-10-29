@@ -1,6 +1,5 @@
 import React from "react";
 import "./sidebar.css";
-import brandLogo from "../Assets/Icon/brand-logo.png";
 import {
   LayoutGrid,
   BarChart2,
@@ -23,8 +22,8 @@ export default function Sidebar({
   onNavigateToHome,
   onMobileOpen,
   sidebarClassName = "shared-sidebar",
-  brandText = "",
-  showLogoIcon = true,
+  brandText = "AuraSync",
+  showLogoIcon = false,
   deviceBattery = 97,
   deviceSubtitle = "D18 Tersambung",
   deviceBtnText = "Terhubung",
@@ -58,14 +57,7 @@ export default function Sidebar({
           }}
           className="mobile-brand-link"
         >
-          {showLogoIcon && (
-            <img
-              src={brandLogo}
-              alt="Logo"
-              className="sidebar-brand-img"
-            />
-          )}
-          {brandText ? <span className="brand-text-aurasync">{brandText}</span> : null}
+          <span className="brand-text-aurasync">{brandText}</span>
         </a>
 
         {topBarActions ? (
@@ -92,14 +84,7 @@ export default function Sidebar({
               }}
               className="sidebar-brand"
             >
-              {showLogoIcon && (
-                <img
-                  src={brandLogo}
-                  alt="Logo"
-                  className="sidebar-brand-img"
-                />
-              )}
-              {brandText ? <span className="brand-text-aurasync">{brandText}</span> : null}
+              <span className="brand-text-aurasync">{brandText}</span>
             </a>
 
             <button
