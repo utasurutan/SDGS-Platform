@@ -612,27 +612,6 @@ export default function ChatAIPage({ onNavigate }) {
                   ))}
                 </div>
               </div>
-
-              {/* Card 2: IoT Smart Band Status */}
-              <div className="chat-iot-card">
-                <div className="chat-iot-header">
-                  <div className="chat-iot-badge">
-                    <span className="chat-iot-pulse-dot" />
-                    <span>IoT Smart Band</span>
-                  </div>
-                  <span className="chat-iot-battery">97%</span>
-                </div>
-                <p className="chat-iot-sub">D18 Tersambung</p>
-                <button
-                  type="button"
-                  className="chat-iot-btn"
-                  onClick={() => {
-                    if (onNavigate) onNavigate("/connect-device");
-                  }}
-                >
-                  Terhubung
-                </button>
-              </div>
             </aside>
           </div>
         )}
