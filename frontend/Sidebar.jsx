@@ -1,5 +1,6 @@
 import React from "react";
 import "./sidebar.css";
+import brandLogo from "../Assets/Icon/brand-logo.png";
 import {
   LayoutGrid,
   BarChart2,
@@ -22,7 +23,7 @@ export default function Sidebar({
   onNavigateToHome,
   onMobileOpen,
   sidebarClassName = "shared-sidebar",
-  brandText = "Aura Pulse",
+  brandText = "",
   showLogoIcon = true,
   deviceBattery = 97,
   deviceSubtitle = "D18 Tersambung",
@@ -58,22 +59,13 @@ export default function Sidebar({
           className="mobile-brand-link"
         >
           {showLogoIcon && (
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#1E6AFF"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              style={{ marginRight: "6px" }}
-            >
-              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-              <path d="M7.5 7.5v3M6 9h3" />
-            </svg>
+            <img
+              src={brandLogo}
+              alt="Logo"
+              className="sidebar-brand-img"
+            />
           )}
-          <span className="brand-text-aurasync">{brandText}</span>
+          {brandText ? <span className="brand-text-aurasync">{brandText}</span> : null}
         </a>
 
         {topBarActions ? (
@@ -101,22 +93,13 @@ export default function Sidebar({
               className="sidebar-brand"
             >
               {showLogoIcon && (
-                <svg
-                  width="26"
-                  height="26"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#1E6AFF"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  style={{ flexShrink: 0 }}
-                >
-                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-                  <path d="M7.5 7.5v3M6 9h3" />
-                </svg>
+                <img
+                  src={brandLogo}
+                  alt="Logo"
+                  className="sidebar-brand-img"
+                />
               )}
-              <span className="brand-text-aurasync">{brandText}</span>
+              {brandText ? <span className="brand-text-aurasync">{brandText}</span> : null}
             </a>
 
             <button

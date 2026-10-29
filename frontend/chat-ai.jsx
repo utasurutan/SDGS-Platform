@@ -287,7 +287,6 @@ export default function ChatAIPage({ onNavigate }) {
         }}
         onMobileOpen={() => setIsMobileMenuOpen(true)}
         sidebarClassName="shared-sidebar"
-        brandText="Aura Pulse"
         showLogoIcon={true}
         deviceBattery={97}
         deviceSubtitle="D18 Tersambung"

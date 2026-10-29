@@ -61,6 +61,18 @@
   text-decoration: none;
 }
 
+.sidebar-brand-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.sidebar-brand:hover .sidebar-brand-img {
+  transform: scale(1.05);
+}
+
 .sidebar-close-btn {
   display: none;
   background: none;
@@ -330,6 +342,13 @@
     text-decoration: none;
     display: flex;
     align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-brand-link .sidebar-brand-img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
   }
 
   .mobile-brand-link .brand-text-aurasync {
