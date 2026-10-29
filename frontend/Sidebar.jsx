@@ -181,7 +181,7 @@ export default function Sidebar({
               <button
                 type="button"
                 className={`nav-item-btn ${activeMenu === "Chat AI" ? "active" : ""}`}
-                onClick={() => onNavClick && onNavClick("Chat AI")}
+                onClick={() => onNavClick && onNavClick("Chat AI", "/chat-ai")}
               >
                 <MessageSquare size={16} className="nav-icon" />
                 <span>Chat AI</span>

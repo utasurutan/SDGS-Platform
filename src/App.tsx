@@ -11,6 +11,7 @@ import SettingsPage from '../frontend/settings.jsx'
 import FaqPage from '../frontend/faq.jsx'
 import KomunitasPage from '../frontend/komunitas.jsx'
 import BeritaPage from '../frontend/berita.jsx'
+import ChatAIPage from '../frontend/chat-ai.jsx'
 
 function App() {
   const [currentPath, setCurrentPath] = useState<string>(() => window.location.pathname)
@@ -95,6 +96,16 @@ function App() {
   ) {
     const slug = currentPath.startsWith('/berita/') ? currentPath.replace('/berita/', '') : null
     return <BeritaPage onNavigate={navigate} currentSlug={slug} />
+  }
+
+  if (
+    currentPath === '/chat-ai' ||
+    currentPath === '/chatai' ||
+    currentPath === '/chat' ||
+    currentPath === '/frontend/chat-ai.html' ||
+    currentPath.endsWith('chat-ai.html')
+  ) {
+    return <ChatAIPage onNavigate={navigate} />
   }
 
   if (
