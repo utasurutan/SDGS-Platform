@@ -1086,11 +1086,12 @@
 
   .header-user-actions {
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 12px;
   }
 
   .header-profile-card {
-    margin-left: auto;
+    display: none;
   }
 
   .create-post-card {
